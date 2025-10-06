@@ -1,6 +1,6 @@
 {
   "name": "ipay-buttons",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "UI buttons for ipay",
   "main": "index.js",
   "type": "module",
@@ -8,7 +8,12 @@
     "type": "git",
     "url": "https://github.com/AsSzlag/ipay-buttons-lib"
   },
-  "keywords": ["ipay", "buttons", "lib", "npm package"],
+  "keywords": [
+    "ipay",
+    "buttons",
+    "lib",
+    "npm package"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
