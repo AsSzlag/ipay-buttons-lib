@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPay Button Preview</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        #button-container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="button-container"></div>
+    <script type="module">
+        import { renderIpayButton } from './index.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderIpayButton('#button-container', {
+                label: 'Open iPay',
+                url: 'https://bikerc-5a1dd.web.app/',
+                target: '_blank'
+            });
+        });
+    </script>
+    Kappa
+</body>
+</html>

@@ -1,35 +1,44 @@
-function renderIpayButton(containerOrSelector, options = {}) {
-  const {
-    label = 'Open iPay',
-    url = 'https://bikerc-5a1dd.web.app/',
-    id,
-    className,
-    target = '_self'
-  } = options;
+// import { ipayLogo } from './ipay-logo.svg';
 
-  const container = typeof containerOrSelector === 'string'
-    ? document.querySelector(containerOrSelector)
-    : containerOrSelector;
+class IPayButton {
+  constructor({  id , url, price, name, email,}) {
+    this.id = id;
+    this.url = url;
+    this.price = price;
+    this.name = name;
+    this.email = email;
 
-  if (!container) {
-    throw new Error('renderIpayButton: Container not found');
   }
 
-  const buttonElement = document.createElement('button');
-  buttonElement.type = 'button';
-  buttonElement.textContent = label;
-  if (id) buttonElement.id = id;
-  if (className) buttonElement.className = className;
+  render(containerOrSelector) {
+    const container = typeof containerOrSelector === 'string'
+      ? document.querySelector(containerOrSelector)
+      : containerOrSelector;
 
-  buttonElement.addEventListener('click', () => {
-    if (target === '_blank') {
-      window.open(url, '_blank', 'noopener,noreferrer');
-      return;
+    if (!container) {
+      throw new Error('IPayButton: Container not found');
     }
-    window.location.assign(url);
-  });
 
-  container.appendChild(buttonElement);
-  return buttonElement;
+    const buttonElement = document.createElement('button');
+    buttonElement.type = 'button';
+    buttonElement.textContent = `Sprawdź zakup przez Ipay`;
+    buttonElement.id = this.id;
+
+    buttonElement.addEventListener('click', () => {
+      const params = new URLSearchParams({
+        name: this.name,
+        email: this.email,
+        price: this.price,
+        id: this.id,
+        url: this.url
+      });
+      const fullUrl = `https://bikerc-5a1dd.web.app/pomiary`;
+      window.open(fullUrl, '_blank', 'noopener,noreferrer');
+    });
+
+    container.appendChild(buttonElement);
+    return buttonElement;
+  }
 }
-module.exports = { renderIpayButton };
+
+module.exports = { IPayButton };
