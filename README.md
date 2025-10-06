@@ -1,6 +1,6 @@
 # ipay-buttons
 
-Beautiful, stylish payment buttons that work across all frameworks and vanilla JS.
+Beautiful, framework-agnostic Web Component for launching iPay flows from any site or app.
 
 ## Installation
 
@@ -12,191 +12,152 @@ yarn add ipay-buttons
 
 ## Features
 
-✅ Works with React, Vue, Angular, Svelte, and vanilla JS  
-✅ Full TypeScript support included  
-✅ Zero dependencies  
-✅ Beautiful gradient styles  
-✅ Lightweight (~2KB gzipped)
+- **Web Component**: works in React, Vue, Angular, Svelte, and vanilla JS
+- **Zero dependencies** and lightweight
+- **TypeScript-ready** via standard DOM custom element typing
+- **Simple API**: pass `url`, `price`, `name`, `email`, `id`
 
-## Usage
-
-### React / TypeScript
-
-TypeScript definitions are included automatically! Just import and use:
-
-```tsx
-import 'ipay-buttons';
-
-function App() {
-  return (
-    <ipay-button href="https://google.com" variant="primary">
-      Go to Google
-    </ipay-button>
-  );
-}
-```
-
-**TypeScript will automatically recognize the component with full autocomplete!**
-
-### React Wrapper (Optional)
-
-For better React integration, create a wrapper component:
-
-```tsx
-import 'ipay-buttons';
-import { ReactNode } from 'react';
-
-interface IpayButtonProps {
-  href: string;
-  variant?: 'primary' | 'secondary' | 'success' | 'outline' | 'danger';
-  target?: '_self' | '_blank' | '_parent' | '_top';
-  children: ReactNode;
-}
-
-export function IpayButton({ 
-  href, 
-  variant = 'primary', 
-  target = '_self', 
-  children 
-}: IpayButtonProps) {
-  return (
-    <ipay-button href={href} variant={variant} target={target}>
-      {children}
-    </ipay-button>
-  );
-}
-
-// Usage
-<IpayButton href="https://google.com" variant="primary">
-  Click me
-</IpayButton>
-```
-
-### Vanilla JavaScript / HTML
+## Quick Start (Vanilla HTML/JS)
 
 ```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <script type="module">
-    import 'ipay-buttons';
-  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Use the UMD build directly in the browser -->
+  <script src="./dist/index.umd.js"></script>
 </head>
 <body>
-  <ipay-button href="https://google.com" variant="primary">
-    Go to Google
+  <ipay-button 
+    id="order-123"
+    price="299.99"
+    name="John Doe"
+    email="john@example.com"
+    url="https://bikerc-5a1dd.web.app/pomiary">
   </ipay-button>
 </body>
 </html>
 ```
 
-### Vue 3
+When clicked, the button will navigate to `url` with the provided attributes encoded as query parameters.
 
-```vue
-<template>
-  <ipay-button href="https://google.com" variant="primary">
-    Go to Google
-  </ipay-button>
-</template>
-
-<script setup lang="ts">
-import 'ipay-buttons';
-</script>
+Example navigation:
+```
+https://bikerc-5a1dd.web.app/pomiary?id=order-123&price=299.99&name=John%20Doe&email=john%40example.com
 ```
 
-### Angular
+## React Usage
 
-```typescript
-// app.module.ts
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+The package registers a custom element. In React you can use it directly:
+
+```tsx
+import 'ipay-buttons';
+
+export default function App() {
+  return (
+    <ipay-button 
+      id="order-123"
+      price="299.99"
+      name="John Doe"
+      email="john@example.com"
+      url="https://bikerc-5a1dd.web.app/pomiary"
+    />
+  );
+}
+```
+
+If you prefer a typed wrapper component:
+
+```tsx
+import 'ipay-buttons';
+import React from 'react';
+
+type IpayButtonProps = {
+  id?: string;
+  price?: string | number;
+  name?: string;
+  email?: string;
+  url?: string;
+};
+
+export function IpayButton(props: IpayButtonProps) {
+  const { id, price, name, email, url } = props;
+  return (
+    <ipay-button
+      id={id}
+      price={price as any}
+      name={name}
+      email={email}
+      url={url}
+    />
+  );
+}
+```
+
+## Vue / Angular / Svelte
+
+Import the package once (e.g., in your app entry) and use the `ipay-button` tag in templates. For Angular, ensure `CUSTOM_ELEMENTS_SCHEMA` is added.
+
+```ts
+// Angular example
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import 'ipay-buttons';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppModule { }
+export class AppModule {}
 ```
 
-```html
-<!-- app.component.html -->
-<ipay-button href="https://google.com" variant="primary">
-  Go to Google
-</ipay-button>
-```
+```vue
+<!-- Vue 3 example -->
+<template>
+  <ipay-button id="order-1" price="99.00" url="https://example.com/pay" />
+</template>
 
-### Svelte
+<script setup>
+import 'ipay-buttons';
+</script>
+```
 
 ```svelte
-<script lang="ts">
+<!-- Svelte example -->
+<script>
   import 'ipay-buttons';
 </script>
 
-<ipay-button href="https://google.com" variant="primary">
-  Go to Google
-</ipay-button>
+<ipay-button id="order-2" price="149.00" url="https://example.com/pay" />
 ```
 
 ## Props / Attributes
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `href` | `string` | **required** | URL to navigate to |
-| `variant` | `'primary' \| 'secondary' \| 'success' \| 'outline' \| 'danger'` | `'primary'` | Button style variant |
-| `target` | `'_self' \| '_blank' \| '_parent' \| '_top'` | `'_self'` | Where to open the link |
+| Attribute | Type            | Default                                            | Description                         |
+|----------|-----------------|----------------------------------------------------|-------------------------------------|
+| `id`     | string          | undefined                                          | Optional identifier for the payment |
+| `price`  | string/number   | undefined                                          | Price amount to pass                |
+| `name`   | string          | undefined                                          | Payer name                          |
+| `email`  | string          | undefined                                          | Payer email                         |
+| `url`    | string          | `https://bikerc-5a1dd.web.app/pomiary`             | Destination URL                     |
 
-## Available Variants
+Behavior:
+- On click, the component builds `?id=...&price=...&name=...&email=...` and navigates to `url` in the same tab.
+- Only attributes present on the element are included in the query string.
 
-### `primary`
-Purple gradient button (default)
+## Local Preview
 
-### `secondary`
-Pink gradient button
+A ready-made preview file is included for quick manual testing:
 
-### `success`
-Blue gradient button
-
-### `outline`
-Outlined button with hover fill
-
-### `danger`
-Red/yellow gradient button
-
-## Examples
-
-```tsx
-// Basic usage
-<ipay-button href="https://google.com">
-  Click me
-</ipay-button>
-
-// With variant
-<ipay-button href="https://google.com" variant="success">
-  Success Button
-</ipay-button>
-
-// Open in new tab
-<ipay-button href="https://google.com" target="_blank" variant="secondary">
-  Open in New Tab
-</ipay-button>
-```
-
-## TypeScript Support
-
-This package includes TypeScript definitions out of the box. No need to install `@types/ipay-buttons` or create custom declarations!
-
-The types are automatically picked up by:
-- ✅ React / Preact
-- ✅ Vue 3
-- ✅ Angular
-- ✅ Svelte
-- ✅ Any TypeScript project
+- Open `preview.html` in your browser.
+- Two buttons are rendered with different attribute sets.
+- Check the browser console for diagnostics.
 
 ## Browser Support
 
 - Chrome/Edge (latest)
 - Firefox (latest)
 - Safari (latest)
-- All browsers with Web Components support
+- Any browser with Web Components support
 
 ## License
 
@@ -204,8 +165,4 @@ MIT © a.s.szlag@gmail.com
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## Issues
-
-Found a bug? Please [open an issue](https://github.com/yourusername/ipay-buttons/issues).
+Contributions are welcome! Please open a PR or issue if you have suggestions.

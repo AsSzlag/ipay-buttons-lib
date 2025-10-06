@@ -1,8 +1,3 @@
-/**
- * iPay Buttons - Payment button components
- * @version 1.3.0
- */
-
 // Import all components to register them
 import './components/ipay-button.js'
 

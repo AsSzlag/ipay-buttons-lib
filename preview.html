@@ -7,30 +7,142 @@
     <style>
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
         }
-        #button-container {
+        
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             text-align: center;
+            max-width: 500px;
+        }
+        
+        h1 {
+            color: #1F2937;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+        
+        p {
+            color: #6B7280;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .button-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .test-info {
+            background: #F3F4F6;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+            text-align: left;
+        }
+        
+        .test-info h3 {
+            margin-top: 0;
+            color: #1F2937;
+            font-size: 18px;
+        }
+        
+        .test-info code {
+            background: #E5E7EB;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #DC2626;
+        }
+        
+        .test-info pre {
+            background: #1F2937;
+            color: #10B981;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 13px;
         }
     </style>
 </head>
 <body>
-    <div id="button-container"></div>
-    <script type="module">
-        import { renderIpayButton } from './index.js';
+    <div class="container">
+        <h1>🎉 iPay Button Test</h1>
+        <p>Testing the custom web component with different configurations</p>
+        
+        <div class="button-wrapper">
+            <!-- Test Button 1: With all attributes -->
+            <ipay-button 
+                id="test-payment-1"
+                price="299.99"
+                name="John Doe"
+                email="john@example.com"
+                url="https://bikerc-5a1dd.web.app/pomiary">
+            </ipay-button>
+            
+            <!-- Test Button 2: With minimal attributes -->
+            <ipay-button 
+                id="test-payment-2"
+                price="599.99">
+            </ipay-button>
+        </div>
+        
+        <div class="test-info">
+            <h3>✅ Test Instructions:</h3>
+            <ul>
+                <li>Click the buttons above to test navigation</li>
+                <li>First button includes: id, price, name, email</li>
+                <li>Second button includes: id, price only</li>
+                <li>Check browser console for any errors</li>
+                <li>Verify URL parameters are passed correctly</li>
+            </ul>
+            
+            <h3>📝 Usage Example:</h3>
+            <pre>&lt;ipay-button 
+  id="payment-123"
+  price="299.99"
+  name="John Doe"
+  email="john@example.com"
+  url="https://your-url.com"&gt;
+&lt;/ipay-button&gt;</pre>
+        </div>
+    </div>
 
+    <!-- Load the UMD bundle for browser testing -->
+    <script src="./dist/index.umd.js"></script>
+    
+    <script>
+        // Add console logging to verify component is working
+        console.log('iPay Button component loaded:', window.IpayButtons);
+        
+        // Listen for button clicks to verify they work
         document.addEventListener('DOMContentLoaded', () => {
-            renderIpayButton('#button-container', {
-                label: 'Open iPay',
-                url: 'https://bikerc-5a1dd.web.app/',
-                target: '_blank'
+            const buttons = document.querySelectorAll('ipay-button');
+            console.log('Found', buttons.length, 'ipay-button elements');
+            
+            buttons.forEach((button, index) => {
+                console.log(`Button ${index + 1} attributes:`, {
+                    id: button.getAttribute('id'),
+                    price: button.getAttribute('price'),
+                    name: button.getAttribute('name'),
+                    email: button.getAttribute('email'),
+                    url: button.getAttribute('url')
+                });
             });
         });
     </script>
-    Kappa
 </body>
 </html>
+
