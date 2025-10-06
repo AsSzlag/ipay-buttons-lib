@@ -149,4 +149,4 @@ class IpayButton extends HTMLElement {
   customElements.define('ipay-button', IpayButton);
   
   // Export for module usage
-  export default IpayButton;
+  export { IpayButton };
