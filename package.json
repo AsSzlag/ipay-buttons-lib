@@ -1,6 +1,6 @@
 {
   "name": "ipay-buttons",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Beautiful payment buttons for all frameworks",
   "main": "dist/index.umd.js",
   "module": "dist/index.js",
@@ -67,7 +67,7 @@
     "./ipay-modal-side": {
       "import": "./dist/components/ipay-modal-side.js",
       "types": "./index.d.ts"
-    },  
+    },
     "./ipay-modal-side-dark": {
       "import": "./dist/components/ipay-modal-side-dark.js",
       "types": "./index.d.ts"
