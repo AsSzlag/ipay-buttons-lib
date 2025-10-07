@@ -79,8 +79,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>🎉 iPay Button Test</h1>
-        <p>Testing the custom web component with different configurations</p>
+        <h1>🎉 iPay Button preview</h1>
         
         <div class="button-wrapper">
             <!-- Test Button 1: With all attributes -->
@@ -92,31 +91,175 @@
                 url="https://bikerc-5a1dd.web.app/pomiary">
             </ipay-button>
             
-            <!-- Test Button 2: With minimal attributes -->
-            <ipay-button 
+            <ipay-button-personal 
                 id="test-payment-2"
                 price="599.99">
-            </ipay-button>
+            </ipay-button-personal>
+            <ipay-button-leasing 
+                id="test-payment-3"
+                price="599.99">
+            </ipay-button-leasing>
+            
+            <ipay-button-leasing-rates 
+                id="test-payment-4"
+                price="1200.00">
+            </ipay-button-leasing-rates>
+
+            <ipay-button-basic 
+                id="test-payment-5"
+                price="599.99">
+            </ipay-button-basic>
+
+            <ipay-button-leasing-wrapped 
+                id="test-payment-6"
+                price="599.99">
+            </ipay-button-leasing-wrapped>
+
+            <ipay-button-rates 
+                id="test-payment-7"
+                price="599.99">
+            </ipay-button-rates>
+
+            <ipay-button-leasing-small-wide 
+                id="test-payment-8"
+                price="599.99">
+            </ipay-button-leasing-small-wide>
+            
+            <ipay-button-leasing-small 
+                id="test-payment-9"
+                price="599.99">
+            </ipay-button-leasing-small>
+
+            <ipay-button-double 
+                id="test-payment-10"
+                price="599.99">
+            </ipay-button-double>
+
+            <ipay-bubble 
+                id="test-payment-11"
+                price="599.99">
+            </ipay-bubble>
+
+            <ipay-modal-side-short 
+                id="test-payment-12"
+                price="599.99">
+            </ipay-modal-side-short>
+
+            <ipay-modal-side 
+                id="test-payment-13"
+                price="599.99">
+            </ipay-modal-side>
+
+            <ipay-modal-side-dark 
+                id="test-payment-14"
+                price="599.99">
+            </ipay-modal-side-dark>
         </div>
         
         <div class="test-info">
             <h3>✅ Test Instructions:</h3>
             <ul>
-                <li>Click the buttons above to test navigation</li>
-                <li>First button includes: id, price, name, email</li>
-                <li>Second button includes: id, price only</li>
-                <li>Check browser console for any errors</li>
-                <li>Verify URL parameters are passed correctly</li>
+                <li>Click any button above to test navigation and URL parameter passing</li>
+                <li>Check browser console for button detection logs and attributes</li>
+                <li>Test hover effects on all button variants</li>
+                <li>Verify that all buttons maintain their unique styling and functionality</li>
             </ul>
             
-            <h3>📝 Usage Example:</h3>
-            <pre>&lt;ipay-button 
+            <h3>📝 Button Components Overview:</h3>
+            <ul>
+                <li><strong>ipay-button:</strong> Main button with "dla osób i firm" text and iPay logo</li>
+                <li><strong>ipay-button-personal:</strong> Personal button with "dla osób" text</li>
+                <li><strong>ipay-button-leasing:</strong> Leasing button with "dla firm + leasing" text</li>
+                <li><strong>ipay-button-leasing-rates:</strong> Two-part button with main section and "Rata od" component</li>
+                <li><strong>ipay-button-basic:</strong> Basic button with logo aligned to bottom</li>
+                <li><strong>ipay-button-leasing-wrapped:</strong> Wrapped version of leasing button</li>
+                <li><strong>ipay-button-rates:</strong> Standard rates button</li>
+                <li><strong>ipay-button-leasing-small:</strong> Compact 60px tall × 220px wide button</li>
+                <li><strong>ipay-button-leasing-small-wide:</strong> Small wide variant</li>
+                <li><strong>ipay-button-double:</strong> Two-button stacked design with shadow hover effects</li>
+                <li><strong>ipay-bubble:</strong> Horizontal button with "Kup na raty" text and arrow</li>
+                <li><strong>ipay-modal-side-short:</strong> Vertical button with dark blue top and rotated text</li>
+                <li><strong>ipay-modal-side:</strong> Side modal button variant</li>
+                <li><strong>ipay-modal-side-dark:</strong> Dark themed side modal button</li>
+            </ul>
+            
+            <h3>📝 Usage Examples:</h3>
+            <pre>&lt;!-- Main Button --&gt;
+&lt;ipay-button 
   id="payment-123"
   price="299.99"
   name="John Doe"
-  email="john@example.com"
-  url="https://your-url.com"&gt;
-&lt;/ipay-button&gt;</pre>
+  email="john@example.com"&gt;
+&lt;/ipay-button&gt;
+
+&lt;!-- Personal Button --&gt;
+&lt;ipay-button-personal 
+  id="payment-456"
+  price="199.99"&gt;
+&lt;/ipay-button-personal&gt;
+
+&lt;!-- Leasing Button --&gt;
+&lt;ipay-button-leasing 
+  id="payment-789"
+  price="599.99"&gt;
+&lt;/ipay-button-leasing&gt;
+
+&lt;!-- Leasing Rates Button (Two-part) --&gt;
+&lt;ipay-button-leasing-rates 
+  id="payment-101"
+  price="1200.00"&gt;
+&lt;/ipay-button-leasing-rates&gt;
+
+&lt;!-- Basic Button --&gt;
+&lt;ipay-button-basic 
+  id="payment-102"
+  price="399.99"&gt;
+&lt;/ipay-button-basic&gt;
+
+&lt;!-- Leasing Small Button (60px × 220px) --&gt;
+&lt;ipay-button-leasing-small 
+  id="payment-103"
+  price="799.99"&gt;
+&lt;/ipay-button-leasing-small&gt;
+
+&lt;!-- Double Button (Stacked) --&gt;
+&lt;ipay-button-double 
+  id="payment-104"
+  price="999.99"&gt;
+&lt;/ipay-button-double&gt;
+
+&lt;!-- Bubble Button (Horizontal with arrow) --&gt;
+&lt;ipay-bubble 
+  id="payment-105"
+  price="149.99"&gt;
+&lt;/ipay-bubble&gt;
+
+&lt;!-- Modal Side Short (Vertical) --&gt;
+&lt;ipay-modal-side-short 
+  id="payment-106"
+  price="249.99"&gt;
+&lt;/ipay-modal-side-short&gt;</pre>
+            
+            <h3>🎨 Styling Features:</h3>
+            <ul>
+                <li><strong>Hover Effects:</strong> All buttons have smooth hover transitions with color changes and lift effects</li>
+                <li><strong>Responsive Design:</strong> Buttons adapt to content and maintain consistent styling</li>
+                <li><strong>Shadow Effects:</strong> Subtle shadows with enhanced effects on hover</li>
+                <li><strong>Color Scheme:</strong> Dark blue (#003574) primary color with white text on hover</li>
+                <li><strong>Typography:</strong> Consistent font family and sizing across all components</li>
+                <li><strong>Border Radius:</strong> 12px rounded corners for modern appearance</li>
+            </ul>
+            
+            <h3>⚙️ Available Attributes:</h3>
+            <ul>
+                <li><strong>id:</strong> Unique identifier for the payment</li>
+                <li><strong>price:</strong> Product price (used for rate calculations)</li>
+                <li><strong>name:</strong> Customer name (optional)</li>
+                <li><strong>email:</strong> Customer email (optional)</li>
+                <li><strong>phone:</strong> Customer phone (optional)</li>
+                <li><strong>url:</strong> Custom target URL (optional, defaults to payment calculator)</li>
+                <li><strong>count:</strong> Product quantity (optional)</li>
+            </ul>
         </div>
     </div>
 
@@ -129,11 +272,63 @@
         
         // Listen for button clicks to verify they work
         document.addEventListener('DOMContentLoaded', () => {
-            const buttons = document.querySelectorAll('ipay-button');
-            console.log('Found', buttons.length, 'ipay-button elements');
+            const mainButtons = document.querySelectorAll('ipay-button');
+            const personalButtons = document.querySelectorAll('ipay-button-personal');
+            const leasingButtons = document.querySelectorAll('ipay-button-leasing');
+            const leasingRatesButtons = document.querySelectorAll('ipay-button-leasing-rates');
+            const basicButtons = document.querySelectorAll('ipay-button-basic');
+            const wrappedButtons = document.querySelectorAll('ipay-button-leasing-wrapped');
+            const ratesButtons = document.querySelectorAll('ipay-button-rates');
+            const leasingSmallWideButtons = document.querySelectorAll('ipay-button-leasing-small-wide');
+            const leasingSmallButtons = document.querySelectorAll('ipay-button-leasing-small');
+            const doubleButtons = document.querySelectorAll('ipay-button-double');
+            const bubbleButtons = document.querySelectorAll('ipay-bubble');
+            const modalSideShortButtons = document.querySelectorAll('ipay-modal-side-short');
+            const modalSideButtons = document.querySelectorAll('ipay-modal-side');
+            const modalSideDarkButtons = document.querySelectorAll('ipay-modal-side-dark');
+
+            console.log('Found button elements:', {
+                main: mainButtons.length,
+                personal: personalButtons.length,
+                leasing: leasingButtons.length,
+                leasingRates: leasingRatesButtons.length,
+                basic: basicButtons.length,
+                wrapped: wrappedButtons.length,
+                rates: ratesButtons.length,
+                leasingSmallWide: leasingSmallWideButtons.length,
+                leasingSmall: leasingSmallButtons.length,
+                double: doubleButtons.length,
+                bubble: bubbleButtons.length,
+                modalSideShort: modalSideShortButtons.length,
+                modalSide: modalSideButtons.length,
+                modalSideDark: modalSideDarkButtons.length
+            });
             
-            buttons.forEach((button, index) => {
-                console.log(`Button ${index + 1} attributes:`, {
+            // Log main buttons
+            mainButtons.forEach((button, index) => {
+                console.log(`Main Button ${index + 1} attributes:`, {
+                    id: button.getAttribute('id'),
+                    price: button.getAttribute('price'),
+                    name: button.getAttribute('name'),
+                    email: button.getAttribute('email'),
+                    url: button.getAttribute('url')
+                });
+            });
+            
+            // Log personal buttons
+            personalButtons.forEach((button, index) => {
+                console.log(`Personal Button ${index + 1} attributes:`, {
+                    id: button.getAttribute('id'),
+                    price: button.getAttribute('price'),
+                    name: button.getAttribute('name'),
+                    email: button.getAttribute('email'),
+                    url: button.getAttribute('url')
+                });
+            });
+            
+            // Log leasing buttons
+            leasingButtons.forEach((button, index) => {
+                console.log(`Leasing Button ${index + 1} attributes:`, {
                     id: button.getAttribute('id'),
                     price: button.getAttribute('price'),
                     name: button.getAttribute('name'),

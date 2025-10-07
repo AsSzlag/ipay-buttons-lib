@@ -20,6 +20,58 @@
       "import": "./dist/components/ipay-button.js",
       "types": "./index.d.ts"
     },
+    "./ipay-button-personal": {
+      "import": "./dist/components/ipay-button-personal.js",
+      "types": "./index.d.ts"
+    },
+    "./ipay-button-leasing": {
+      "import": "./dist/components/ipay-button-leasing.js",
+      "types": "./index.d.ts"
+    },
+    "./ipay-button-basic": {
+      "import": "./dist/components/ipay-button-basic.js",
+      "types": "./index.d.ts"
+    },
+    "./ipay-button-leasing-wrapped": {
+      "import": "./dist/components/ipay-button-leasing-wrapped.js",
+      "types": "./index.d.ts"
+    },
+    "./ipay-button-leasing-rates": {
+      "import": "./dist/components/ipay-button-leasing-rates.js",
+      "types": "./index.d.ts"
+    },
+    "./ipay-button-rates": {
+      "import": "./dist/components/ipay-button-rates.js",
+      "types": "./index.d.ts"
+    },
+    "./ipay-button-leasing-small-wide": {
+      "import": "./dist/components/ipay-button-leasing-small-wide.js",
+      "types": "./index.d.ts"
+    },
+    "./ipay-button-leasing-small": {
+      "import": "./dist/components/ipay-button-leasing-small.js",
+      "types": "./index.d.ts"
+    },
+    "./ipay-button-double": {
+      "import": "./dist/components/ipay-button-double.js",
+      "types": "./index.d.ts"
+    },
+    "./ipay-bubble": {
+      "import": "./dist/components/ipay-bubble.js",
+      "types": "./index.d.ts"
+    },
+    "./ipay-modal-side-short": {
+      "import": "./dist/components/ipay-modal-side-short.js",
+      "types": "./index.d.ts"
+    },
+    "./ipay-modal-side": {
+      "import": "./dist/components/ipay-modal-side.js",
+      "types": "./index.d.ts"
+    },  
+    "./ipay-modal-side-dark": {
+      "import": "./dist/components/ipay-modal-side-dark.js",
+      "types": "./index.d.ts"
+    },
     "./package.json": "./package.json"
   },
   "type": "module",

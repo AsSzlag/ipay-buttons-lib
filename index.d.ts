@@ -6,6 +6,13 @@
 
 // Declare the IpayButton class
 export interface IpayButtonElement extends HTMLElement {
+    id: string;
+    price: string;
+    name: string;
+    email: string;
+    url: string;
+    count: string;
+    phone: string;
     href: string;
     variant: 'primary' | 'secondary' | 'success' | 'outline' | 'danger';
     target: '_self' | '_blank' | '_parent' | '_top';

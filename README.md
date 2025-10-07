@@ -1,6 +1,6 @@
 # ipay-buttons
 
-Beautiful, framework-agnostic Web Component for launching iPay flows from any site or app.
+Beautiful, framework-agnostic Web Components library for launching iPay flows from any site or app. Features 14 different button variants with consistent styling and hover effects.
 
 ## Installation
 
@@ -12,10 +12,63 @@ yarn add ipay-buttons
 
 ## Features
 
-- **Web Component**: works in React, Vue, Angular, Svelte, and vanilla JS
+- **14 Button Variants**: Multiple button designs for different use cases
+- **Web Components**: Works in React, Vue, Angular, Svelte, and vanilla JS
 - **Zero dependencies** and lightweight
 - **TypeScript-ready** via standard DOM custom element typing
-- **Simple API**: pass `url`, `price`, `name`, `email`, `id`
+- **Consistent API**: Pass `url`, `price`, `name`, `email`, `id` to any button
+- **Modern Design**: Dark blue theme with smooth hover effects and shadows
+- **Responsive**: Adapts to content and maintains consistent styling
+
+## Button Components
+
+### Standard Buttons
+
+#### `ipay-button`
+Main button with "dla osób i firm" text and iPay logo.
+
+#### `ipay-button-personal`
+Personal button with "dla osób" text.
+
+#### `ipay-button-leasing`
+Leasing button with "dla firm + leasing" text.
+
+#### `ipay-button-basic`
+Basic button with logo aligned to bottom.
+
+#### `ipay-button-rates`
+Standard rates button.
+
+### Specialized Buttons
+
+#### `ipay-button-leasing-rates`
+Two-part button with main section and "Rata od" component showing calculated rates.
+
+#### `ipay-button-leasing-small`
+Compact button: 60px tall × 220px wide.
+
+#### `ipay-button-leasing-small-wide`
+Small wide variant of the leasing button.
+
+#### `ipay-button-leasing-wrapped`
+Wrapped version of the leasing button.
+
+#### `ipay-button-double`
+Two-button stacked design with shadow hover effects.
+
+### Modal & Bubble Buttons
+
+#### `ipay-bubble`
+Horizontal button with "Kup na raty" text and arrow icon.
+
+#### `ipay-modal-side-short`
+Vertical button with dark blue top section and 180° rotated text.
+
+#### `ipay-modal-side`
+Side modal button variant.
+
+#### `ipay-modal-side-dark`
+Dark themed side modal button.
 
 ## Quick Start (Vanilla HTML/JS)
 
@@ -29,6 +82,7 @@ yarn add ipay-buttons
   <script src="./dist/index.umd.js"></script>
 </head>
 <body>
+  <!-- Main button -->
   <ipay-button 
     id="order-123"
     price="299.99"
@@ -36,38 +90,71 @@ yarn add ipay-buttons
     email="john@example.com"
     url="https://bikerc-5a1dd.web.app/pomiary">
   </ipay-button>
+
+  <!-- Leasing rates button with dynamic rate calculation -->
+  <ipay-button-leasing-rates 
+    id="order-124"
+    price="1200.00">
+  </ipay-button-leasing-rates>
+
+  <!-- Compact button -->
+  <ipay-button-leasing-small 
+    id="order-125"
+    price="799.99">
+  </ipay-button-leasing-small>
+
+  <!-- Bubble button with arrow -->
+  <ipay-bubble 
+    id="order-126"
+    price="149.99">
+  </ipay-bubble>
 </body>
 </html>
 ```
 
-When clicked, the button will navigate to `url` with the provided attributes encoded as query parameters.
+When clicked, any button will navigate to `url` with the provided attributes encoded as query parameters.
 
 Example navigation:
 ```
-https://bikerc-5a1dd.web.app/pomiary?id=order-123&price=299.99&name=John%20Doe&email=john%40example.com
+https://ipay-25be9.web.app/?id=order-123&price=299.99&name=John%20Doe&email=john%40example.com
 ```
 
 ## React Usage
 
-The package registers a custom element. In React you can use it directly:
+The package registers custom elements. In React you can use them directly:
 
 ```tsx
 import 'ipay-buttons';
 
 export default function App() {
   return (
-    <ipay-button 
-      id="order-123"
-      price="299.99"
-      name="John Doe"
-      email="john@example.com"
-      url="https://bikerc-5a1dd.web.app/pomiary"
-    />
+    <div>
+      {/* Main button */}
+      <ipay-button 
+        id="order-123"
+        price="299.99"
+        name="John Doe"
+        email="john@example.com"
+        url="https://bikerc-5a1dd.web.app/pomiary"
+      />
+
+      {/* Leasing rates button */}
+      <ipay-button-leasing-rates 
+        id="order-124"
+        price="1200.00"
+      />
+
+      {/* Double button */}
+      <ipay-button-double 
+        id="order-125"
+        price="999.99"
+      />
+    </div>
   );
 }
 ```
 
-If you prefer a typed wrapper component:
+If you prefer typed wrapper components:
 
 ```tsx
 import 'ipay-buttons';
@@ -78,18 +165,52 @@ type IpayButtonProps = {
   price?: string | number;
   name?: string;
   email?: string;
+  phone?: string;
   url?: string;
+  count?: string | number;
 };
 
 export function IpayButton(props: IpayButtonProps) {
-  const { id, price, name, email, url } = props;
+  const { id, price, name, email, phone, url, count } = props;
   return (
     <ipay-button
       id={id}
       price={price as any}
       name={name}
       email={email}
+      phone={phone}
       url={url}
+      count={count as any}
+    />
+  );
+}
+
+export function IpayButtonLeasingRates(props: IpayButtonProps) {
+  const { id, price, name, email, phone, url, count } = props;
+  return (
+    <ipay-button-leasing-rates
+      id={id}
+      price={price as any}
+      name={name}
+      email={email}
+      phone={phone}
+      url={url}
+      count={count as any}
+    />
+  );
+}
+
+export function IpayBubble(props: IpayButtonProps) {
+  const { id, price, name, email, phone, url, count } = props;
+  return (
+    <ipay-bubble
+      id={id}
+      price={price as any}
+      name={name}
+      email={email}
+      phone={phone}
+      url={url}
+      count={count as any}
     />
   );
 }
@@ -97,7 +218,7 @@ export function IpayButton(props: IpayButtonProps) {
 
 ## Vue / Angular / Svelte
 
-Import the package once (e.g., in your app entry) and use the `ipay-button` tag in templates. For Angular, ensure `CUSTOM_ELEMENTS_SCHEMA` is added.
+Import the package once (e.g., in your app entry) and use any of the button tags in templates. For Angular, ensure `CUSTOM_ELEMENTS_SCHEMA` is added.
 
 ```ts
 // Angular example
@@ -113,7 +234,11 @@ export class AppModule {}
 ```vue
 <!-- Vue 3 example -->
 <template>
-  <ipay-button id="order-1" price="99.00" url="https://example.com/pay" />
+  <div>
+    <ipay-button id="order-1" price="99.00" url="https://example.com/pay" />
+    <ipay-button-leasing-rates id="order-2" price="1200.00" />
+    <ipay-bubble id="order-3" price="299.99" />
+  </div>
 </template>
 
 <script setup>
@@ -127,30 +252,71 @@ import 'ipay-buttons';
   import 'ipay-buttons';
 </script>
 
-<ipay-button id="order-2" price="149.00" url="https://example.com/pay" />
+<div>
+  <ipay-button id="order-1" price="149.00" url="https://example.com/pay" />
+  <ipay-button-double id="order-2" price="799.99" />
+  <ipay-modal-side-short id="order-3" price="199.99" />
+</div>
 ```
 
 ## Props / Attributes
 
 | Attribute | Type            | Default                                            | Description                         |
 |----------|-----------------|----------------------------------------------------|-------------------------------------|
-| `id`     | string          | undefined                                          | Optional identifier for the payment |
-| `price`  | string/number   | undefined                                          | Price amount to pass                |
+| `id`     | string          | undefined                                          | Unique identifier for the payment   |
+| `price`  | string/number   | undefined                                          | Price amount (used for rate calculations) |
 | `name`   | string          | undefined                                          | Payer name                          |
 | `email`  | string          | undefined                                          | Payer email                         |
-| `url`    | string          | `https://bikerc-5a1dd.web.app/pomiary`             | Destination URL                     |
+| `phone`  | string          | undefined                                          | Payer phone number                  |
+| `url`    | string          | `https://ipay-25be9.web.app/`                      | Destination URL                     |
+| `count`  | string/number   | undefined                                          | Product quantity                    |
 
-Behavior:
-- On click, the component builds `?id=...&price=...&name=...&email=...` and navigates to `url` in the same tab.
+### Behavior:
+- On click, any component builds `?id=...&price=...&name=...&email=...&phone=...&count=...` and navigates to `url` in the same tab.
 - Only attributes present on the element are included in the query string.
+- The `price` attribute is used by `ipay-button-leasing-rates` to calculate and display dynamic rates.
+
+### Special Features:
+
+#### Rate Calculation (`ipay-button-leasing-rates`)
+- Automatically calculates rate as `price / 10`
+- Displays "Rata od X zł" where X is the calculated rate
+- Falls back to "Rata od 12,00 zł" if no price is provided
+
+#### Hover Effects
+- All buttons have consistent hover effects with dark blue background (`#003574`)
+- Text and icons change to white on hover
+- Subtle lift animation and enhanced shadow effects
+- Smooth transitions (0.2s ease)
 
 ## Local Preview
 
-A ready-made preview file is included for quick manual testing:
+A comprehensive preview file is included for quick manual testing:
 
-- Open `preview.html` in your browser.
-- Two buttons are rendered with different attribute sets.
-- Check the browser console for diagnostics.
+- Open `preview.html` in your browser
+- All 14 button variants are rendered with different attribute sets
+- Check the browser console for detailed diagnostics and button detection logs
+- Test hover effects and click functionality on all button types
+- Verify URL parameter passing and navigation behavior
+
+## Styling & Design
+
+### Color Scheme
+- **Primary Color**: Dark blue (`#003574`)
+- **Background**: White with subtle shadows
+- **Hover State**: Dark blue background with white text/icons
+- **Borders**: Light gray (`#E5E7EB`) with rounded corners
+
+### Typography
+- **Font Family**: `-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`
+- **Font Weights**: 400 (regular), 600 (semi-bold), 700 (bold)
+- **Font Sizes**: 10px-24px depending on button variant
+
+### Layout
+- **Border Radius**: 12px for modern appearance
+- **Padding**: 8px-24px depending on button size
+- **Shadows**: Subtle `0 1px 3px rgba(0, 0, 0, 0.1)` with enhanced hover effects
+- **Transitions**: Smooth 0.2s ease animations
 
 ## Browser Support
 
