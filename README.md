@@ -88,7 +88,7 @@ Dark themed side modal button.
     price="299.99"
     name="John Doe"
     email="john@example.com"
-    url="https://mediamarkt.pl/pl/promo-list/Apple_premiera_iPad_Pro">
+    url="https:/example.com/product">
   </ipay-button>
 
   <!-- Leasing rates button with dynamic rate calculation -->
@@ -135,7 +135,7 @@ export default function App() {
         price="299.99"
         name="John Doe"
         email="john@example.com"
-        url="https://mediamarkt.pl/pl/promo-list/Apple_premiera_iPad_Pro"
+        url="https://example.com/product"
       />
 
       {/* Leasing rates button */}
