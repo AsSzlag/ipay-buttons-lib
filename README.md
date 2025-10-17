@@ -289,15 +289,9 @@ import 'ipay-buttons';
 - Subtle lift animation and enhanced shadow effects
 - Smooth transitions (0.2s ease)
 
-## Local Preview
+## Preview
 
-A comprehensive preview file is included for quick manual testing:
-
-- Open `preview.html` in your browser
-- All 14 button variants are rendered with different attribute sets
-- Check the browser console for detailed diagnostics and button detection logs
-- Test hover effects and click functionality on all button types
-- Verify URL parameter passing and navigation behavior
+A comprehensive preview file is hosted on: https://asszlag.github.io/ipay-buttons-lib/preview.html
 
 ## Styling & Design
 
