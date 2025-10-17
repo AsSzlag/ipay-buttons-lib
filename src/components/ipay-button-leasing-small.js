@@ -2,7 +2,7 @@ import { BaseIpayButton } from '../shared/base-button.js';
 import { buttonBaseStyles, variantStyles } from '../shared/styles.js';
 import { ipayLogo } from '../shared/logo.js';
 
-const TARGET_URL = 'https://ipay-25be9.web.app/';
+const TARGET_URL = 'https://app.ipay-dev.host06.300devs.com/';
 
 class IpayButtonLeasingSmall extends HTMLElement {
     static get observedAttributes() {

@@ -88,7 +88,7 @@ Dark themed side modal button.
     price="299.99"
     name="John Doe"
     email="john@example.com"
-    url="https://bikerc-5a1dd.web.app/pomiary">
+    url="https://mediamarkt.pl/pl/promo-list/Apple_premiera_iPad_Pro">
   </ipay-button>
 
   <!-- Leasing rates button with dynamic rate calculation -->
@@ -116,7 +116,7 @@ When clicked, any button will navigate to `url` with the provided attributes enc
 
 Example navigation:
 ```
-https://ipay-25be9.web.app/?id=order-123&price=299.99&name=John%20Doe&email=john%40example.com
+https://app.ipay-dev.host06.300devs.com/?id=order-123&price=299.99&name=John%20Doe&email=john%40example.com
 ```
 
 ## React Usage
@@ -135,7 +135,7 @@ export default function App() {
         price="299.99"
         name="John Doe"
         email="john@example.com"
-        url="https://bikerc-5a1dd.web.app/pomiary"
+        url="https://mediamarkt.pl/pl/promo-list/Apple_premiera_iPad_Pro"
       />
 
       {/* Leasing rates button */}
@@ -253,7 +253,7 @@ import 'ipay-buttons';
 </script>
 
 <div>
-  <ipay-button id="order-1" price="149.00" url="https://example.com/pay" />
+  <ipay-button id="order-1" price="149.00" url="https://example.com/product" />
   <ipay-button-double id="order-2" price="799.99" />
   <ipay-modal-side-short id="order-3" price="199.99" />
 </div>
@@ -264,11 +264,11 @@ import 'ipay-buttons';
 | Attribute | Type            | Default                                            | Description                         |
 |----------|-----------------|----------------------------------------------------|-------------------------------------|
 | `id`     | string          | undefined                                          | Unique identifier for the payment   |
-| `price`  | string/number   | undefined                                          | Price amount (used for rate calculations) |
+| `price`  | string/number   | undefined                                          | Price amount                        |
 | `name`   | string          | undefined                                          | Payer name                          |
 | `email`  | string          | undefined                                          | Payer email                         |
 | `phone`  | string          | undefined                                          | Payer phone number                  |
-| `url`    | string          | `https://ipay-25be9.web.app/`                      | Destination URL                     |
+| `url`    | string          | undefined                                          | Product URL                         |
 | `count`  | string/number   | undefined                                          | Product quantity                    |
 
 ### Behavior:

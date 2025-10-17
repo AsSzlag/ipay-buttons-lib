@@ -2,7 +2,7 @@ import { BaseIpayButton } from '../shared/base-button.js';
 import { buttonBaseStyles, variantStyles } from '../shared/styles.js';
 import { bubbleLogo } from '../shared/bubbleLogo.js';
 
-const TARGET_URL = 'https://ipay-25be9.web.app/';
+const TARGET_URL = 'https://app.ipay-dev.host06.300devs.com/';
 
 class IpayBubble extends HTMLElement {
     static get observedAttributes() {
