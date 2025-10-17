@@ -112,7 +112,7 @@ Dark themed side modal button.
 </html>
 ```
 
-When clicked, any button will navigate to `url` with the provided attributes encoded as query parameters.
+When clicked, any button will navigate to iPay website with the provided attributes encoded as query parameters.
 
 Example navigation:
 ```
