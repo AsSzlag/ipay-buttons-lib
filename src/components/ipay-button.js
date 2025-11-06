@@ -6,7 +6,7 @@ const TARGET_URL = 'https://app.ipay-dev.host06.300devs.com/';
 
 class IpayButton extends HTMLElement {
     static get observedAttributes() {
-      return ['id', 'price', 'url', 'count',  'name', 'email', 'phone'];
+      return ['id', 'price', 'url', 'count',  'name', 'email', 'phone', 'delivery_price', 'product_id'];
     }
   
     constructor() {
@@ -35,16 +35,21 @@ class IpayButton extends HTMLElement {
       const name = this.getAttribute('name');
       const email = this.getAttribute('email');
       const phone = this.getAttribute('phone');
+      const delivery_price = this.getAttribute('delivery_price');
+      const product_id = this.getAttribute('product_id');
   
       // Build query parameters
       const params = new URLSearchParams();
       if (id) params.append('id', id);
       if (price) params.append('price', price);
       if (count) params.append('count', count);
+      if (url) params.append('url', url);
       if (name) params.append('name', name);
       if (email) params.append('email', email);
       if (phone) params.append('phone', phone);
-  
+      if (delivery_price) params.append('delivery_price', delivery_price);
+      if (product_id) params.append('product_id', product_id);
+
       // Navigate to URL with parameters
       const targetUrl = `${TARGET_URL}?${params.toString()}`;
       window.open(targetUrl, '_blank');
