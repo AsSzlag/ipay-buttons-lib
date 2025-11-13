@@ -24,6 +24,14 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             text-align: center;
             max-width: 500px;
+            width: 100%;
+        }
+        
+        ipay-calculator {
+            display: block !important;
+            width: 100% !important;
+            max-width: 400px !important;
+            min-width: 300px !important;
         }
         
         h1 {
@@ -92,6 +100,17 @@
                 delivery_price="10.00"
                 product_id="1234567890">
             </ipay-button>
+
+            <ipay-calculator 
+                id="test-calculator-1"
+                price="6000.00"
+                tax="0.00"
+                name="John Doe"
+                email="john@example.com"
+                url="https://example.com/product"
+                delivery_price="10.00"
+                product_id="1234567890">
+            </ipay-calculator>
             
             <ipay-button-personal 
                 id="test-payment-2"
@@ -173,6 +192,7 @@
             <h3>📝 Button Components Overview:</h3>
             <ul>
                 <li><strong>ipay-button:</strong> Main button with "dla osób i firm" text and iPay logo</li>
+                <li><strong>ipay-calculator:</strong> Interactive calculator with client type tabs, monthly rate slider (6-60 months), and iRaty button</li>
                 <li><strong>ipay-button-personal:</strong> Personal button with "dla osób" text</li>
                 <li><strong>ipay-button-leasing:</strong> Leasing button with "dla firm + leasing" text</li>
                 <li><strong>ipay-button-leasing-rates:</strong> Two-part button with main section and "Rata od" component</li>
@@ -196,6 +216,15 @@
   name="John Doe"
   email="john@example.com"&gt;
 &lt;/ipay-button&gt;
+
+&lt;!-- Calculator Component --&gt;
+&lt;ipay-calculator 
+  id="payment-calc-1"
+  price="4604.40"
+  name="John Doe"
+  email="john@example.com"
+  url="https://example.com/product"&gt;
+&lt;/ipay-calculator&gt;
 
 &lt;!-- Personal Button --&gt;
 &lt;ipay-button-personal 
@@ -264,6 +293,17 @@
                 <li><strong>phone:</strong> Customer phone (optional)</li>
                 <li><strong>url:</strong> Product URL</li>
                 <li><strong>count:</strong> Product quantity (optional)</li>
+                <li><strong>tax:</strong> Tax/interest rate percentage - only used by <code>ipay-calculator</code> (e.g., "2" for 2%, defaults to 0%)</li>
+                <li><strong>delivery_price:</strong> Delivery/shipping price (optional)</li>
+                <li><strong>product_id:</strong> Product identifier (optional)</li>
+            </ul>
+            
+            <h3>📊 Calculator Component Features:</h3>
+            <ul>
+                <li><strong>Tax Calculation:</strong> If tax is 0 or not provided, calculates as <code>price / months</code>. If tax is provided, calculates as <code>(price × (1 + tax/100)) / months</code></li>
+                <li><strong>Badge Display:</strong> Shows "X rat 0%" badge only when tax is 0% (positioned in bottom right corner)</li>
+                <li><strong>Client Type:</strong> Switches between individual and business client types, routing to different URLs</li>
+                <li><strong>Real-time Updates:</strong> Monthly rate updates automatically as slider changes</li>
             </ul>
         </div>
     </div>
@@ -291,9 +331,21 @@
             const modalSideShortButtons = document.querySelectorAll('ipay-modal-side-short');
             const modalSideButtons = document.querySelectorAll('ipay-modal-side');
             const modalSideDarkButtons = document.querySelectorAll('ipay-modal-side-dark');
-
+            const calculatorButtons = document.querySelectorAll('ipay-calculator');
+            
+            // Log calculator buttons
+            calculatorButtons.forEach((calc, index) => {
+                console.log(`Calculator ${index + 1}:`, {
+                    id: calc.getAttribute('id'),
+                    price: calc.getAttribute('price'),
+                    shadowRoot: calc.shadowRoot ? 'exists' : 'missing',
+                    shadowRootContent: calc.shadowRoot ? calc.shadowRoot.innerHTML.substring(0, 100) : 'N/A'
+                });
+            });
+            
             console.log('Found button elements:', {
                 main: mainButtons.length,
+                calculator: calculatorButtons.length,
                 personal: personalButtons.length,
                 leasing: leasingButtons.length,
                 leasingRates: leasingRatesButtons.length,

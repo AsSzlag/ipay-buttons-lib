@@ -1,6 +1,6 @@
 # ipay-buttons
 
-Beautiful, framework-agnostic Web Components library for launching iPay flows from any site or app. Features 14 different button variants with consistent styling and hover effects.
+Beautiful, framework-agnostic Web Components library for launching iPay flows from any site or app. Features 15 different button variants with consistent styling and hover effects, including an interactive calculator component.
 
 ## Installation
 
@@ -12,7 +12,8 @@ yarn add ipay-buttons
 
 ## Features
 
-- **14 Button Variants**: Multiple button designs for different use cases
+- **15 Button Variants**: Multiple button designs for different use cases
+- **Interactive Calculator**: Full-featured calculator with client type selection, monthly rate slider, and dynamic calculations
 - **Web Components**: Works in React, Vue, Angular, Svelte, and vanilla JS
 - **Zero dependencies** and lightweight
 - **TypeScript-ready** via standard DOM custom element typing
@@ -21,6 +22,18 @@ yarn add ipay-buttons
 - **Responsive**: Adapts to content and maintains consistent styling
 
 ## Button Components
+
+### Interactive Components
+
+#### `ipay-calculator`
+Interactive calculator component with:
+- **Client Type Tabs**: Switch between "Klient indywidualny" (Individual client) and "Klient firmowy" (Business client)
+- **Monthly Rate Slider**: Adjustable slider from 6 to 60 months with real-time rate calculation
+- **Dynamic Rate Display**: Shows calculated monthly rate based on price and selected months (includes 2% interest)
+- **iRaty Button**: Clickable button with checkmark icon and "Przejdź dalej" (Proceed) text
+- **Installment Badge**: Displays current number of installments (e.g., "10 rat 0%")
+
+The calculator automatically calculates monthly rates as `(price × 1.02) / months` and updates in real-time as the slider moves.
 
 ### Standard Buttons
 
@@ -91,6 +104,27 @@ Dark themed side modal button.
     url="https:/example.com/product">
   </ipay-button>
 
+  <!-- Interactive calculator with slider and rate display -->
+  <ipay-calculator 
+    id="order-calc-1"
+    price="4604.40"
+    name="John Doe"
+    email="john@example.com"
+    url="https://example.com/product"
+    tax="0"
+    delivery_price="10.00"
+    product_id="12345">
+  </ipay-calculator>
+
+  <!-- Calculator with tax (2% interest) -->
+  <ipay-calculator 
+    id="order-calc-2"
+    price="4604.40"
+    tax="2"
+    name="Jane Doe"
+    email="jane@example.com">
+  </ipay-calculator>
+
   <!-- Leasing rates button with dynamic rate calculation -->
   <ipay-button-leasing-rates 
     id="order-124"
@@ -136,6 +170,27 @@ export default function App() {
         name="John Doe"
         email="john@example.com"
         url="https://example.com/product"
+      />
+
+      {/* Interactive calculator without tax */}
+      <ipay-calculator 
+        id="order-calc-1"
+        price="4604.40"
+        name="John Doe"
+        email="john@example.com"
+        url="https://example.com/product"
+        tax="0"
+        delivery_price="10.00"
+        product_id="12345"
+      />
+
+      {/* Interactive calculator with 2% tax */}
+      <ipay-calculator 
+        id="order-calc-2"
+        price="4604.40"
+        tax="2"
+        name="Jane Doe"
+        email="jane@example.com"
       />
 
       {/* Leasing rates button */}
@@ -270,13 +325,32 @@ import 'ipay-buttons';
 | `phone`  | string          | undefined                                          | Payer phone number                  |
 | `url`    | string          | undefined                                          | Product URL                         |
 | `count`  | string/number   | undefined                                          | Product quantity                    |
+| `tax`    | string/number   | 0                                                  | Tax/interest rate percentage (e.g., "2" for 2%). Only used by `ipay-calculator` |
+| `delivery_price` | string/number | undefined | Delivery/shipping price |
+| `product_id` | string | undefined | Product identifier |
 
 ### Behavior:
-- On click, any component builds `?id=...&price=...&name=...&email=...&phone=...&count=...` and navigates to `url` in the same tab.
+- On click, any component builds `?id=...&price=...&name=...&email=...&phone=...&count=...&delivery_price=...&product_id=...` and navigates to `url` in the same tab.
 - Only attributes present on the element are included in the query string.
 - The `price` attribute is used by `ipay-button-leasing-rates` to calculate and display dynamic rates.
+- The `ipay-calculator` component includes `months` and `client_type` parameters in the query string when clicked.
+- The `tax` attribute is only used by `ipay-calculator` for monthly rate calculations (defaults to 0% if not provided).
 
 ### Special Features:
+
+#### Interactive Calculator (`ipay-calculator`)
+- **Client Type Selection**: Toggle between individual and business client types
+- **Monthly Rate Calculation**: 
+  - If `tax` is 0 or not provided: `monthlyRate = price / months`
+  - If `tax` is provided: `monthlyRate = (price × (1 + tax/100)) / months` (bank-style calculation)
+- **Tax Prop**: Accepts tax/interest rate as percentage (e.g., `tax="2"` for 2%). Defaults to 0% if not provided
+- **Slider Range**: Adjustable from 6 to 60 months with real-time updates
+- **Dynamic Badge**: Shows current installment count (e.g., "10 rat 0%") - only visible when tax is 0%
+- **Currency Formatting**: Uses Polish locale (pl-PL) for proper number formatting
+- **Real-time Updates**: Monthly rate, badge, and slider tooltip update as user adjusts the slider
+- **URL Routing**: Navigates to different URLs based on client type:
+  - Individual: `/new-individual-application`
+  - Business: `/new-company-application`
 
 #### Rate Calculation (`ipay-button-leasing-rates`)
 - Automatically calculates rate as `price / 10`

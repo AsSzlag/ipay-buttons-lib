@@ -13,6 +13,7 @@ import './components/ipay-bubble.js'
 import './components/ipay-modal-side-short.js'
 import './components/ipay-modal-side.js'
 import './components/ipay-modal-side-dark.js'
+import './components/ipay-calculator.js'
 
 // Re-export for direct imports (optional)
 export { IpayButton } from './components/ipay-button.js';
@@ -29,3 +30,4 @@ export { IpayBubble } from './components/ipay-bubble.js';
 export { IpayModalSideShort } from './components/ipay-modal-side-short.js';
 export { IpayModalSide } from './components/ipay-modal-side.js';
 export { IpayModalSideDark } from './components/ipay-modal-side-dark.js';
+export { IpayCalculator } from './components/ipay-calculator.js';
