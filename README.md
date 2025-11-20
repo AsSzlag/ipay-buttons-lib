@@ -85,6 +85,8 @@ Dark themed side modal button.
 
 ## Quick Start (Vanilla HTML/JS)
 
+**Important:** You must provide `id` (partner ID), `price`, `count`, and `product_id` attributes for the buttons to work correctly.
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -97,8 +99,10 @@ Dark themed side modal button.
 <body>
   <!-- Main button -->
   <ipay-button 
-    id="order-123"
+    id="PARTNER-12345"
     price="299.99"
+    count="1"
+    product_id="PROD-67890"
     name="John Doe"
     email="john@example.com"
     url="https:/example.com/product">
@@ -106,20 +110,23 @@ Dark themed side modal button.
 
   <!-- Interactive calculator with slider and rate display -->
   <ipay-calculator 
-    id="order-calc-1"
+    id="PARTNER-12345"
     price="4604.40"
+    count="1"
+    product_id="PROD-67890"
     name="John Doe"
     email="john@example.com"
     url="https://example.com/product"
     tax="0"
-    delivery_price="10.00"
-    product_id="12345">
+    delivery_price="10.00">
   </ipay-calculator>
 
   <!-- Calculator with tax (2% interest) -->
   <ipay-calculator 
-    id="order-calc-2"
+    id="PARTNER-12345"
     price="4604.40"
+    count="1"
+    product_id="PROD-67890"
     tax="2"
     name="Jane Doe"
     email="jane@example.com">
@@ -174,20 +181,23 @@ export default function App() {
 
       {/* Interactive calculator without tax */}
       <ipay-calculator 
-        id="order-calc-1"
+        id="PARTNER-12345"
         price="4604.40"
+        count="1"
+        product_id="PROD-67890"
         name="John Doe"
         email="john@example.com"
         url="https://example.com/product"
         tax="0"
         delivery_price="10.00"
-        product_id="12345"
       />
 
       {/* Interactive calculator with 2% tax */}
       <ipay-calculator 
-        id="order-calc-2"
+        id="PARTNER-12345"
         price="4604.40"
+        count="1"
+        product_id="PROD-67890"
         tax="2"
         name="Jane Doe"
         email="jane@example.com"
@@ -318,19 +328,25 @@ import 'ipay-buttons';
 
 | Attribute | Type            | Default                                            | Description                         |
 |----------|-----------------|----------------------------------------------------|-------------------------------------|
-| `id`     | string          | undefined                                          | Unique identifier for the payment   |
-| `price`  | string/number   | undefined                                          | Price amount                        |
+| `id`     | string          | undefined                                          | Partner ID number (obtained from partner panel or through iPay) |
+| `price`  | string/number   | undefined                                          | Price amount (required)            |
 | `name`   | string          | undefined                                          | Payer name                          |
 | `email`  | string          | undefined                                          | Payer email                         |
 | `phone`  | string          | undefined                                          | Payer phone number                  |
 | `url`    | string          | undefined                                          | Product URL                         |
-| `count`  | string/number   | undefined                                          | Product quantity                    |
+| `count`  | string/number   | undefined                                          | Product quantity (required)        |
 | `tax`    | string/number   | 0                                                  | Tax/interest rate percentage (e.g., "2" for 2%). Only used by `ipay-calculator` |
 | `delivery_price` | string/number | undefined | Delivery/shipping price |
-| `product_id` | string | undefined | Product identifier |
+| `product_id` | string | undefined | Product identifier (required) |
+
+### Required Attributes:
+- **`id`**: Partner ID number (obtained from partner panel or through iPay) - **Required**
+- **`price`**: Product price amount - **Required**
+- **`count`**: Product quantity - **Required**
+- **`product_id`**: Product identifier - **Required**
 
 ### Behavior:
-- On click, any component builds `?id=...&price=...&name=...&email=...&phone=...&count=...&delivery_price=...&product_id=...` and navigates to `url` in the same tab.
+- On click, any component builds `?id=...&price=...&count=...&product_id=...&name=...&email=...&phone=...&delivery_price=...` and navigates to `url` in the same tab.
 - Only attributes present on the element are included in the query string.
 - The `price` attribute is used by `ipay-button-leasing-rates` to calculate and display dynamic rates.
 - The `ipay-calculator` component includes `months` and `client_type` parameters in the query string when clicked.

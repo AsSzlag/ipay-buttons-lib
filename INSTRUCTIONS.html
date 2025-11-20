@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPay Buttons Library - Instrukcja Użytkowania</title>
+    <style>
+        @media print {
+            body {
+                margin: 0;
+                padding: 20px;
+            }
+            .page-break {
+                page-break-before: always;
+            }
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: white;
+        }
+        
+        h1 {
+            color: #003574;
+            border-bottom: 3px solid #003574;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+        
+        h2 {
+            color: #003574;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 24px;
+            border-left: 4px solid #003574;
+            padding-left: 15px;
+        }
+        
+        h3 {
+            color: #555;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        h4 {
+            color: #666;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #d63384;
+        }
+        
+        pre {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 15px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+            color: #333;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background: #003574;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: #10B981;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #003574;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        .footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>iPay Buttons Library - Instrukcja Użytkowania</h1>
+    <p><strong>Wersja:</strong> 1.10.0</p>
+    <p><strong>Ostatnia aktualizacja:</strong> 2025</p>
+    
+    <div class="info-box">
+        <strong>📦 Instalacja:</strong> <code>npm install ipay-buttons</code> lub <code>yarn add ipay-buttons</code>
+    </div>
+
+    <h2>1. Szybki Start</h2>
+    
+    <div class="warning-box">
+        <strong>⚠️ Ważne:</strong> Musisz podać atrybuty <code>id</code> (ID partnera), <code>price</code>, <code>count</code> i <code>product_id</code> aby przyciski działały prawidłowo.
+    </div>
+    
+    <h3>1.1 Vanilla HTML/JavaScript</h3>
+    <p>Dołącz pakiet UMD w swoim HTML:</p>
+    <pre><code>&lt;script src="./node_modules/ipay-buttons/dist/index.umd.js"&gt;&lt;/script&gt;
+
+&lt;!-- Użyj dowolnego komponentu przycisku --&gt;
+&lt;ipay-button 
+  id="PARTNER-12345"
+  price="299.99"
+  count="1"
+  product_id="PROD-67890"
+  name="Jan Kowalski"
+  email="jan@example.com"
+  url="https://example.com/product"&gt;
+&lt;/ipay-button&gt;</code></pre>
+
+    <h3>1.2 React</h3>
+    <pre><code>import 'ipay-buttons';
+
+function App() {
+  return (
+    &lt;ipay-button 
+      id="PARTNER-12345"
+      price="299.99"
+      count="1"
+      product_id="PROD-67890"
+      name="Jan Kowalski"
+      email="jan@example.com"
+      url="https://example.com/product"
+    /&gt;
+  );
+}</code></pre>
+
+    <h3>1.3 Vue</h3>
+    <pre><code>&lt;template&gt;
+  &lt;ipay-button 
+    id="order-123"
+    price="299.99"
+    url="https://example.com/product"
+  /&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+import 'ipay-buttons';
+&lt;/script&gt;</code></pre>
+
+    <h3>1.4 Angular</h3>
+    <pre><code>import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import 'ipay-buttons';
+
+@NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+export class AppModule {}</code></pre>
+
+    <div class="page-break"></div>
+
+    <h2>2. Dostępne Komponenty</h2>
+    
+    <p>Biblioteka zawiera <strong>15 różnych wariantów przycisków</strong> plus interaktywny kalkulator:</p>
+    
+    <h3>2.1 Standardowe Przyciski</h3>
+    <table>
+        <tr>
+            <th>Komponent</th>
+            <th>Opis</th>
+            <th>Zastosowanie</th>
+        </tr>
+        <tr>
+            <td><code>&lt;ipay-button&gt;</code></td>
+            <td>Główny przycisk z tekstem "dla osób i firm" i logo iPay</td>
+            <td>Uniwersalny przycisk płatności</td>
+        </tr>
+        <tr>
+            <td><code>&lt;ipay-button-personal&gt;</code></td>
+            <td>Przycisk osobisty z tekstem "dla osób"</td>
+            <td>Tylko dla klientów indywidualnych</td>
+        </tr>
+        <tr>
+            <td><code>&lt;ipay-button-leasing&gt;</code></td>
+            <td>Przycisk leasingowy z tekstem "dla firm + leasing"</td>
+            <td>Klienci biznesowi z leasingiem</td>
+        </tr>
+        <tr>
+            <td><code>&lt;ipay-button-basic&gt;</code></td>
+            <td>Podstawowy przycisk z logo wyrównanym do dołu</td>
+            <td>Minimalistyczny design</td>
+        </tr>
+        <tr>
+            <td><code>&lt;ipay-button-rates&gt;</code></td>
+            <td>Standardowy przycisk z ratami</td>
+            <td>Wyświetlanie informacji o ratach</td>
+        </tr>
+    </table>
+
+    <h3>2.2 Wyspecjalizowane Przyciski</h3>
+    <table>
+        <tr>
+            <th>Komponent</th>
+            <th>Opis</th>
+            <th>Zastosowanie</th>
+        </tr>
+        <tr>
+            <td><code>&lt;ipay-button-leasing-rates&gt;</code></td>
+            <td>Dwuczęściowy przycisk z sekcją główną i komponentem "Rata od"</td>
+            <td>Pokazuje obliczone raty dynamicznie</td>
+        </tr>
+        <tr>
+            <td><code>&lt;ipay-button-leasing-small&gt;</code></td>
+            <td>Kompaktowy przycisk: 60px wysokości × 220px szerokości</td>
+            <td>Układy z ograniczoną przestrzenią</td>
+        </tr>
+        <tr>
+            <td><code>&lt;ipay-button-leasing-small-wide&gt;</code></td>
+            <td>Mała szeroka wersja przycisku leasingowego</td>
+            <td>Poziomy kompaktowy układ</td>
+        </tr>
+        <tr>
+            <td><code>&lt;ipay-button-leasing-wrapped&gt;</code></td>
+            <td>Opakowana wersja przycisku leasingowego</td>
+            <td>Alternatywny design leasingowy</td>
+        </tr>
+        <tr>
+            <td><code>&lt;ipay-button-double&gt;</code></td>
+            <td>Dwupoziomowy przycisk z efektami cienia przy najechaniu</td>
+            <td>Wyraźne wezwanie do działania</td>
+        </tr>
+    </table>
+
+    <h3>2.3 Przyciski Modalne i Bubble</h3>
+    <table>
+        <tr>
+            <th>Komponent</th>
+            <th>Opis</th>
+            <th>Zastosowanie</th>
+        </tr>
+        <tr>
+            <td><code>&lt;ipay-bubble&gt;</code></td>
+            <td>Poziomy przycisk z tekstem "Kup na raty" i strzałką</td>
+            <td>Styl linku tekstowego</td>
+        </tr>
+        <tr>
+            <td><code>&lt;ipay-modal-side-short&gt;</code></td>
+            <td>Pionowy przycisk z ciemnoniebieskim górnym paskiem i obróconym tekstem o 180°</td>
+            <td>Integracja z panelem bocznym</td>
+        </tr>
+        <tr>
+            <td><code>&lt;ipay-modal-side&gt;</code></td>
+            <td>Wariant przycisku modalnego bocznego</td>
+            <td>Integracja z modałem</td>
+        </tr>
+        <tr>
+            <td><code>&lt;ipay-modal-side-dark&gt;</code></td>
+            <td>Ciemny tematyczny przycisk modalny boczny</td>
+            <td>Kompatybilność z ciemnym motywem</td>
+        </tr>
+    </table>
+
+    <div class="page-break"></div>
+
+    <h2>3. Interaktywny Komponent Kalkulatora</h2>
+    
+    <p><code>&lt;ipay-calculator&gt;</code> to w pełni funkcjonalny komponent kalkulatora z wyborem typu klienta, suwakiem miesięcznej raty i dynamicznymi obliczeniami.</p>
+    
+    <h3>3.1 Funkcje</h3>
+    <ul>
+        <li><strong>Wybór typu klienta:</strong> Przełączanie między "Klient indywidualny" a "Klient firmowy"</li>
+        <li><strong>Suwak miesięcznej raty:</strong> Regulowany od 6 do 60 miesięcy z obliczaniem raty w czasie rzeczywistym</li>
+        <li><strong>Wsparcie dla podatku/odsetek:</strong> Opcjonalny atrybut tax do obliczeń odsetek</li>
+        <li><strong>Dynamiczna odznaka:</strong> Pokazuje liczbę rat (tylko gdy podatek wynosi 0%)</li>
+        <li><strong>Routing URL:</strong> Przekierowuje do różnych URL w zależności od typu klienta</li>
+    </ul>
+
+    <h3>3.2 Podstawowe Użycie</h3>
+    <pre><code>&lt;ipay-calculator 
+  id="PARTNER-12345"
+  price="4604.40"
+  count="1"
+  product_id="PROD-67890"
+  name="Jan Kowalski"
+  email="jan@example.com"
+  url="https://example.com/product"&gt;
+&lt;/ipay-calculator&gt;</code></pre>
+
+    <h3>3.3 Z Podatkiem/Odsetkami</h3>
+    <pre><code>&lt;ipay-calculator 
+  id="PARTNER-12345"
+  price="4604.40"
+  count="1"
+  product_id="PROD-67890"
+  tax="2"
+  name="Anna Nowak"
+  email="anna@example.com"&gt;
+&lt;/ipay-calculator&gt;</code></pre>
+
+    <h3>3.4 Logika Obliczeń</h3>
+    <div class="info-box">
+        <strong>Bez podatku (lub tax="0"):</strong><br>
+        <code>monthlyRate = price / months</code><br><br>
+        <strong>Z podatkiem:</strong><br>
+        <code>monthlyRate = (price × (1 + tax/100)) / months</code>
+    </div>
+
+    <h3>3.5 Routing URL</h3>
+    <ul>
+        <li><strong>Klient Indywidualny:</strong> Przekierowuje do <code>/new-individual-application</code></li>
+        <li><strong>Klient Firmowy:</strong> Przekierowuje do <code>/new-company-application</code></li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <h2>4. Referencja Atrybutów</h2>
+    
+    <div class="info-box">
+        <strong>📋 Wymagane Atrybuty:</strong><br>
+        Aby przyciski działały prawidłowo, musisz podać następujące atrybuty:
+        <ul style="margin-top: 10px; margin-bottom: 0;">
+            <li><code>id</code> - Numer ID partnera (otrzymany z panelu partnera lub przez iPay)</li>
+            <li><code>price</code> - Cena produktu</li>
+            <li><code>count</code> - Ilość produktu</li>
+            <li><code>product_id</code> - Identyfikator produktu</li>
+        </ul>
+    </div>
+    
+    <table>
+        <tr>
+            <th>Atrybut</th>
+            <th>Typ</th>
+            <th>Domyślna wartość</th>
+            <th>Opis</th>
+        </tr>
+        <tr>
+            <td><code>id</code></td>
+            <td>string</td>
+            <td>undefined</td>
+            <td><strong>WYMAGANE:</strong> Numer ID partnera (otrzymany z panelu partnera lub przez iPay)</td>
+        </tr>
+        <tr>
+            <td><code>price</code></td>
+            <td>string/number</td>
+            <td>undefined</td>
+            <td><strong>WYMAGANE:</strong> Cena produktu</td>
+        </tr>
+        <tr>
+            <td><code>name</code></td>
+            <td>string</td>
+            <td>undefined</td>
+            <td>Imię i nazwisko klienta (opcjonalne)</td>
+        </tr>
+        <tr>
+            <td><code>email</code></td>
+            <td>string</td>
+            <td>undefined</td>
+            <td>Email klienta (opcjonalne)</td>
+        </tr>
+        <tr>
+            <td><code>phone</code></td>
+            <td>string</td>
+            <td>undefined</td>
+            <td>Numer telefonu klienta (opcjonalne)</td>
+        </tr>
+        <tr>
+            <td><code>url</code></td>
+            <td>string</td>
+            <td>undefined</td>
+            <td>URL produktu (opcjonalne)</td>
+        </tr>
+        <tr>
+            <td><code>count</code></td>
+            <td>string/number</td>
+            <td>undefined</td>
+            <td><strong>WYMAGANE:</strong> Ilość produktu</td>
+        </tr>
+        <tr>
+            <td><code>tax</code></td>
+            <td>string/number</td>
+            <td>0</td>
+            <td>Procent podatku/odsetek. Używane tylko przez <code>ipay-calculator</code>. Przykład: "2" dla 2%</td>
+        </tr>
+        <tr>
+            <td><code>delivery_price</code></td>
+            <td>string/number</td>
+            <td>undefined</td>
+            <td>Cena dostawy/wysyłki (opcjonalne)</td>
+        </tr>
+        <tr>
+            <td><code>product_id</code></td>
+            <td>string</td>
+            <td>undefined</td>
+            <td><strong>WYMAGANE:</strong> Identyfikator produktu</td>
+        </tr>
+    </table>
+
+    <div class="page-break"></div>
+
+    <h2>5. Kompletne Przykłady</h2>
+
+    <h3>5.1 Standardowy Przycisk ze Wszystkimi Atrybutami</h3>
+    <pre><code>&lt;ipay-button 
+  id="PARTNER-12345"
+  price="299.99"
+  count="1"
+  product_id="PROD-67890"
+  name="Jan Kowalski"
+  email="jan@example.com"
+  phone="+48123456789"
+  url="https://example.com/product"
+  delivery_price="10.00"&gt;
+&lt;/ipay-button&gt;</code></pre>
+
+    <h3>5.2 Kalkulator z Podatkiem</h3>
+    <pre><code>&lt;ipay-calculator 
+  id="PARTNER-12345"
+  price="4604.40"
+  count="1"
+  product_id="PROD-67890"
+  tax="2.5"
+  name="Anna Nowak"
+  email="anna@example.com"
+  phone="+48123456789"
+  url="https://example.com/product"
+  delivery_price="15.00"&gt;
+&lt;/ipay-calculator&gt;</code></pre>
+
+    <h3>5.3 Kalkulator bez Podatku (pokazuje odznakę 0%)</h3>
+    <pre><code>&lt;ipay-calculator 
+  id="PARTNER-12345"
+  price="4604.40"
+  count="1"
+  product_id="PROD-67890"
+  tax="0"
+  name="Piotr Wiśniewski"
+  email="piotr@example.com"&gt;
+&lt;/ipay-calculator&gt;</code></pre>
+
+    <h3>5.4 Przycisk Leasingowy z Ratami</h3>
+    <pre><code>&lt;ipay-button-leasing-rates 
+  id="PARTNER-12345"
+  price="1200.00"
+  count="1"
+  product_id="PROD-67890"
+  name="Firma Sp. z o.o."
+  email="info@firma.com"&gt;
+&lt;/ipay-button-leasing-rates&gt;</code></pre>
+
+    <div class="page-break"></div>
+
+    <h2>6. Zachowanie i Parametry Zapytania</h2>
+
+    <h3>6.1 Zachowanie przy Kliknięciu</h3>
+    <p>Po kliknięciu dowolnego przycisku, buduje on ciąg zapytania ze wszystkimi podanymi atrybutami i przekierowuje do aplikacji iPay:</p>
+    
+    <div class="info-box">
+        <strong>Przykładowy URL:</strong><br>
+        <code>https://app.ipay-dev.host06.300devs.com/new-individual-application?id=PARTNER-12345&price=299.99&count=1&product_id=PROD-67890&name=Jan%20Kowalski&email=jan%40example.com&months=10&client_type=individual</code>
+    </div>
+
+    <h3>6.2 Parametry Specyficzne dla Kalkulatora</h3>
+    <p>Komponent <code>ipay-calculator</code> automatycznie dodaje:</p>
+    <ul>
+        <li><code>months</code> - Aktualna wartość suwaka (6-60)</li>
+        <li><code>client_type</code> - Wybrana zakładka ("individual" lub "business")</li>
+    </ul>
+
+    <h3>6.3 Routing URL (Tylko Kalkulator)</h3>
+    <ul>
+        <li><strong>Klient Indywidualny:</strong> <code>/new-individual-application</code></li>
+        <li><strong>Klient Firmowy:</strong> <code>/new-company-application</code></li>
+    </ul>
+
+    <h2>7. Stylizacja i Dostosowywanie</h2>
+
+    <h3>7.1 Schemat Kolorów</h3>
+    <ul>
+        <li><strong>Kolor Główny:</strong> Ciemny niebieski (#003574)</li>
+        <li><strong>Tło:</strong> Białe z subtelnymi cieniami</li>
+        <li><strong>Stan Hover:</strong> Ciemnoniebieskie tło z białym tekstem/ikonami</li>
+        <li><strong>Ramki:</strong> Jasnoszary (#E5E7EB)</li>
+    </ul>
+
+    <h3>7.2 Typografia</h3>
+    <ul>
+        <li><strong>Rodzina Czcionek:</strong> Czcionki systemowe (-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto)</li>
+        <li><strong>Grubość Czcionek:</strong> 400 (zwykła), 600 (półpogrubiona), 700 (pogrubiona)</li>
+    </ul>
+
+    <h3>7.3 Efekty Hover</h3>
+    <p>Wszystkie przyciski mają spójne efekty hover:</p>
+    <ul>
+        <li>Płynne przejścia kolorów (0.2s ease)</li>
+        <li>Ciemnoniebieskie tło przy najechaniu</li>
+        <li>Biały tekst i ikony przy najechaniu</li>
+        <li>Subtelna animacja podniesienia z wzmocnionymi cieniami</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <h2>8. Szczegóły Komponentu Kalkulatora</h2>
+
+    <h3>8.1 Struktura Komponentu</h3>
+    <p>Kalkulator składa się z trzech głównych sekcji:</p>
+    <ol>
+        <li><strong>Sekcja Górna:</strong> Zakładki typu klienta (Indywidualny/Firmowy)</li>
+        <li><strong>Sekcja Środkowa:</strong> Wyświetlanie miesięcznej raty i suwak (6-60 miesięcy)</li>
+        <li><strong>Sekcja Dolna:</strong> Logo iPay, przycisk "Przejdź dalej" i opcjonalna odznaka</li>
+    </ol>
+
+    <h3>8.2 Przykłady Obliczeń Podatku</h3>
+    
+    <h4>Przykład 1: Bez Podatku</h4>
+    <pre><code>Cena: 4604.40 zł
+Miesiące: 10
+Podatek: 0% (lub nie podany)
+
+Obliczenie: 4604.40 / 10 = 460.44 zł/miesiąc
+Odznaka: "10 rat 0%" (widoczna)</code></pre>
+
+    <h4>Przykład 2: Z Podatkiem 2%</h4>
+    <pre><code>Cena: 4604.40 zł
+Miesiące: 10
+Podatek: 2%
+
+Obliczenie: (4604.40 × 1.02) / 10 = 469.65 zł/miesiąc
+Odznaka: Ukryta</code></pre>
+
+    <h3>8.3 Aktualizacje w Czasie Rzeczywistym</h3>
+    <p>Kalkulator aktualizuje się w czasie rzeczywistym gdy:</p>
+    <ul>
+        <li>Zmienia się wartość suwaka (miesiące)</li>
+        <li>Przełączana jest zakładka typu klienta</li>
+        <li>Zmienia się atrybut tax</li>
+        <li>Zmienia się atrybut price</li>
+    </ul>
+
+    <h2>9. Wsparcie Przeglądarek</h2>
+    <ul>
+        <li>Chrome/Edge (najnowsza wersja)</li>
+        <li>Firefox (najnowsza wersja)</li>
+        <li>Safari (najnowsza wersja)</li>
+        <li>Każda przeglądarka z obsługą Web Components</li>
+    </ul>
+
+    <h2>10. Rozwiązywanie Problemów</h2>
+
+    <h3>10.1 Komponent Nie Renderuje Się</h3>
+    <ul>
+        <li>Upewnij się, że skrypt jest załadowany: <code>&lt;script src="./dist/index.umd.js"&gt;&lt;/script&gt;</code></li>
+        <li>Sprawdź konsolę przeglądarki pod kątem błędów</li>
+        <li>Zweryfikuj, czy przeglądarka obsługuje custom elements</li>
+    </ul>
+
+    <h3>10.2 Kalkulator Nie Wyświetla Się</h3>
+    <ul>
+        <li>Upewnij się, że atrybut <code>price</code> jest podany</li>
+        <li>Sprawdź, czy komponent jest prawidłowo zaimportowany</li>
+        <li>Zweryfikuj, czy pliki build są aktualne (uruchom <code>npm run build</code>)</li>
+    </ul>
+
+    <h3>10.3 Problemy ze Stylizacją</h3>
+    <ul>
+        <li>Komponenty używają Shadow DOM - zewnętrzny CSS nie będzie na nie wpływał</li>
+        <li>Wszystkie style są samodzielne w każdym komponencie</li>
+        <li>Używaj atrybutów komponentu do kontroli zachowania, nie CSS</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <h2>11. Najlepsze Praktyki</h2>
+
+    <h3>11.1 Kiedy Używać Każdego Komponentu</h3>
+    <ul>
+        <li><strong>ipay-button:</strong> Ogólnego przeznaczenia, działa dla wszystkich typów klientów</li>
+        <li><strong>ipay-button-personal:</strong> Gdy kierujesz się tylko do klientów indywidualnych</li>
+        <li><strong>ipay-button-leasing:</strong> Gdy kierujesz się do klientów biznesowych z opcjami leasingu</li>
+        <li><strong>ipay-calculator:</strong> Gdy chcesz interaktywnego obliczania rat i wyboru typu klienta</li>
+        <li><strong>ipay-button-leasing-rates:</strong> Gdy chcesz wyraźnie pokazać obliczone raty</li>
+    </ul>
+
+    <h3>11.2 Wydajność</h3>
+    <ul>
+        <li>Komponenty są lekkie i nie mają zależności</li>
+        <li>Używaj tree-shaking z modułami ES dla mniejszych rozmiarów pakietów</li>
+        <li>Dostępne są importy poszczególnych komponentów dla lepszego code splitting</li>
+    </ul>
+
+    <h3>11.3 Dostępność</h3>
+    <ul>
+        <li>Wszystkie przyciski są dostępne z klawiatury</li>
+        <li>Prawidłowa semantyczna struktura HTML</li>
+        <li>Atrybuty ARIA gdzie to stosowne</li>
+    </ul>
+
+    <div class="footer">
+        <p><strong>iPay Buttons Library v1.10.0</strong></p>
+        <p>Więcej informacji: <a href="https://github.com/asszlag/ipay-buttons-lib">Repozytorium GitHub</a></p>
+        <p>© 2025 a.s.szlag@gmail.com | Licencja MIT</p>
+    </div>
+</body>
+</html>
