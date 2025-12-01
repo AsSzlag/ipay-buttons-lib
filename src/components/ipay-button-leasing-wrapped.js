@@ -2,7 +2,8 @@ import { BaseIpayButton } from '../shared/base-button.js';
 import { buttonBaseStyles, variantStyles } from '../shared/styles.js';
 import { ipayLogo } from '../shared/logo.js';
 
-const TARGET_URL = 'https://app.ipay-dev.host06.300devs.com/';
+const BASE_URL = 'https://app.ipay-dev.host06.300devs.com';
+const TARGET_URL = `${BASE_URL}/new-individual-application`;
 
 class IpayButtonLeasingWrapped extends HTMLElement {
     static get observedAttributes() {

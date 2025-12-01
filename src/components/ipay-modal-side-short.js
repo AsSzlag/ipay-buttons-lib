@@ -2,7 +2,8 @@ import { BaseIpayButton } from '../shared/base-button.js';
 import { buttonBaseStyles, variantStyles } from '../shared/styles.js';
 import { arrowLogo } from '../shared/arrowLogo.js';
 
-const TARGET_URL = 'https://app.ipay-dev.host06.300devs.com/';
+const BASE_URL = 'https://app.ipay-dev.host06.300devs.com';
+const TARGET_URL = `${BASE_URL}/new-individual-application`;
 
 class IpayModalSideShort extends HTMLElement {
     static get observedAttributes() {
