@@ -5,9 +5,17 @@ import { ipayLogo } from '../shared/logo.js';
 const BASE_URL = 'http://185.25.151.171:8411';
 const TARGET_URL = `${BASE_URL}/new-individual-application`;
 
-class IpayButtonBasic extends HTMLElement {
+class IpayButtonCart extends HTMLElement {
   static get observedAttributes() {
-    return ['id', 'price', 'url', 'count', 'name', 'email', 'phone', 'delivery_price', 'product_id'];
+    return [
+      'id', 
+      'name', 
+      'email', 
+      'phone', 
+      'delivery_price', 
+      'product_id',
+      'cart-items' // JSON string with array of cart items
+    ];
   }
 
   constructor() {
@@ -22,34 +30,73 @@ class IpayButtonBasic extends HTMLElement {
 
   addEventListeners() {
     const button = this.shadowRoot.querySelector('button');
-    button.addEventListener('click', () => {
-      this.handleClick();
-    });
+    if (button) {
+      button.addEventListener('click', () => {
+        this.handleClick();
+      });
+    }
+  }
+
+  parseCartItems() {
+    const cartItemsAttr = this.getAttribute('cart-items');
+    if (!cartItemsAttr) {
+      return [];
+    }
+
+    try {
+      const items = JSON.parse(cartItemsAttr);
+      if (!Array.isArray(items)) {
+        console.warn('ipay-button-cart: cart-items must be an array');
+        return [];
+      }
+      return items;
+    } catch (e) {
+      console.error('ipay-button-cart: Invalid JSON in cart-items attribute', e);
+      return [];
+    }
   }
 
   handleClick() {
-    // Get all attributes
+    // Get standard attributes
     const id = this.getAttribute('id');
-    const price = this.getAttribute('price');
-    const count = this.getAttribute('count');
-    const url = this.getAttribute('url');
     const name = this.getAttribute('name');
     const email = this.getAttribute('email');
     const phone = this.getAttribute('phone');
     const delivery_price = this.getAttribute('delivery_price');
     const product_id = this.getAttribute('product_id');
 
+    // Parse cart items
+    const cartItems = this.parseCartItems();
+
+    if (cartItems.length === 0) {
+      console.warn('ipay-button-cart: No cart items provided');
+      return;
+    }
+
     // Build query parameters
     const params = new URLSearchParams();
+
+    // Add standard parameters
     if (id) params.append('id', id);
-    if (price) params.append('price', price);
-    if (count) params.append('count', count);
-    if (url) params.append('url', url);
     if (name) params.append('name', name);
     if (email) params.append('email', email);
     if (phone) params.append('phone', phone);
     if (delivery_price) params.append('delivery_price', delivery_price);
     if (product_id) params.append('product_id', product_id);
+
+    // Add cart items
+    // Format: items[0][url]=...&items[0][price]=...&items[0][count]=...
+    cartItems.forEach((item, index) => {
+      if (item.url) params.append(`items[${index}][url]`, item.url);
+      if (item.price) params.append(`items[${index}][price]`, item.price);
+      if (item.count) params.append(`items[${index}][count]`, item.count);
+      
+      // Optional: also support product_id per item if provided
+      if (item.product_id) params.append(`items[${index}][product_id]`, item.product_id);
+    });
+
+    // Add total count of items
+    params.append('items_count', cartItems.length.toString());
 
     // Navigate to URL with parameters
     const targetUrl = `${TARGET_URL}?${params.toString()}`;
@@ -76,7 +123,8 @@ class IpayButtonBasic extends HTMLElement {
             align-items: center;
             justify-content: space-between;
             gap: 12px;
-            width: fit-content;
+            min-width: 240px;
+            height: 64px;
           }
 
           button:hover {
@@ -95,8 +143,8 @@ class IpayButtonBasic extends HTMLElement {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            justify-content: flex-end;
             gap: 4px;
+            flex: 1;
           }
   
           .brand {
@@ -109,8 +157,16 @@ class IpayButtonBasic extends HTMLElement {
             transition: filter 0.2s ease;
           }
 
+          .title {
+            font-size: 14px;
+            color: #1F2937;
+            font-weight: 600;
+            margin: 0;
+            transition: color 0.2s ease;
+          }
+
           .subtitle {
-            font-size: 12px;
+            font-size: 11px;
             color: #6B7280;
             font-weight: 400;
             margin: 0;
@@ -122,13 +178,17 @@ class IpayButtonBasic extends HTMLElement {
             align-items: center;
             gap: 8px;
             color: #6B7280;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 600;
             transition: color 0.2s ease;
           }
 
           button:hover .logo {
             filter: brightness(0) invert(1);
+          }
+
+          button:hover .title {
+            color: white;
           }
 
           button:hover .subtitle {
@@ -141,8 +201,8 @@ class IpayButtonBasic extends HTMLElement {
           }
   
           .green-dot {
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
             background: #10B981;
             border-radius: 50%;
             flex-shrink: 0;
@@ -151,11 +211,13 @@ class IpayButtonBasic extends HTMLElement {
         <button>
           <div class="content">
             <div class="brand">
-              <div class="logo" style="display: flex; align-items: center; justify-content: flex-end;">${ipayLogo}</div>
+              <div class="logo">${ipayLogo}</div>
             </div>
+            <p class="title">Finansowanie koszyka</p>
+            <p class="subtitle">dla osób i firm</p>
           </div>
           <div class="action">
-            <span >Oblicz</span>
+            <span>Oblicz</span>
             <div class="green-dot"></div>
           </div>
         </button>
@@ -171,7 +233,8 @@ class IpayButtonBasic extends HTMLElement {
 }
 
 // Register the component
-customElements.define('ipay-button-basic', IpayButtonBasic);
+customElements.define('ipay-button-cart', IpayButtonCart);
 
 // Export for module usage
-export { IpayButtonBasic };
+export { IpayButtonCart };
+

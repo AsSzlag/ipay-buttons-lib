@@ -178,6 +178,20 @@
                 id="test-payment-14"
                 price="599.99">
             </ipay-modal-side-dark>
+
+            <ipay-button-cart 
+                id="test-payment-15"
+                name="John Doe"
+                email="john@example.com"
+                phone="+48123456789"
+                delivery_price="15.99"
+                product_id="MAIN-PRODUCT-001"
+                cart-items='[
+                    {"url": "https://example.com/product/1", "price": "299.99", "count": "2", "product_id": "PROD-001"},
+                    {"url": "https://example.com/product/2", "price": "149.99", "count": "1", "product_id": "PROD-002"},
+                    {"url": "https://example.com/product/3", "price": "89.99", "count": "3"}
+                ]'>
+            </ipay-button-cart>
         </div>
         
         <div class="test-info">
@@ -206,6 +220,7 @@
                 <li><strong>ipay-modal-side-short:</strong> Vertical button with dark blue top and rotated text</li>
                 <li><strong>ipay-modal-side:</strong> Side modal button variant</li>
                 <li><strong>ipay-modal-side-dark:</strong> Dark themed side modal button</li>
+                <li><strong>ipay-button-cart:</strong> Cart checkout button that handles multiple items (1-100) with customer info and delivery details</li>
             </ul>
             
             <h3>📝 Usage Examples:</h3>
@@ -272,7 +287,20 @@
 &lt;ipay-modal-side-short 
   id="payment-106"
   price="249.99"&gt;
-&lt;/ipay-modal-side-short&gt;</pre>
+&lt;/ipay-modal-side-short&gt;
+
+&lt;!-- Cart Button (Multiple Items) --&gt;
+&lt;ipay-button-cart 
+  id="payment-cart-1"
+  name="John Doe"
+  email="john@example.com"
+  phone="+48123456789"
+  delivery_price="15.99"
+  cart-items='[
+    {"url": "https://example.com/product/1", "price": "299.99", "count": "2"},
+    {"url": "https://example.com/product/2", "price": "149.99", "count": "1"}
+  ]'&gt;
+&lt;/ipay-button-cart&gt;</pre>
             
             <h3>🎨 Styling Features:</h3>
             <ul>
@@ -296,6 +324,7 @@
                 <li><strong>tax:</strong> Tax/interest rate percentage - only used by <code>ipay-calculator</code> (e.g., "2" for 2%, defaults to 0%)</li>
                 <li><strong>delivery_price:</strong> Delivery/shipping price (optional)</li>
                 <li><strong>product_id:</strong> Product identifier (optional)</li>
+                <li><strong>cart-items:</strong> JSON string with array of cart items - only for <code>ipay-button-cart</code>. Each item must have: <code>url</code>, <code>price</code>, <code>count</code> (optional: <code>product_id</code>)</li>
             </ul>
             
             <h3>📊 Calculator Component Features:</h3>
@@ -331,6 +360,7 @@
             const modalSideShortButtons = document.querySelectorAll('ipay-modal-side-short');
             const modalSideButtons = document.querySelectorAll('ipay-modal-side');
             const modalSideDarkButtons = document.querySelectorAll('ipay-modal-side-dark');
+            const cartButtons = document.querySelectorAll('ipay-button-cart');
             const calculatorButtons = document.querySelectorAll('ipay-calculator');
             
             // Log calculator buttons
@@ -358,7 +388,8 @@
                 bubble: bubbleButtons.length,
                 modalSideShort: modalSideShortButtons.length,
                 modalSide: modalSideButtons.length,
-                modalSideDark: modalSideDarkButtons.length
+                modalSideDark: modalSideDarkButtons.length,
+                cart: cartButtons.length
             });
             
             // Log main buttons
@@ -391,6 +422,27 @@
                     name: button.getAttribute('name'),
                     email: button.getAttribute('email'),
                     url: button.getAttribute('url')
+                });
+            });
+            
+            // Log cart buttons
+            cartButtons.forEach((button, index) => {
+                const cartItems = button.getAttribute('cart-items');
+                let parsedItems = null;
+                try {
+                    parsedItems = cartItems ? JSON.parse(cartItems) : null;
+                } catch (e) {
+                    console.warn('Failed to parse cart items:', e);
+                }
+                console.log(`Cart Button ${index + 1} attributes:`, {
+                    id: button.getAttribute('id'),
+                    name: button.getAttribute('name'),
+                    email: button.getAttribute('email'),
+                    phone: button.getAttribute('phone'),
+                    delivery_price: button.getAttribute('delivery_price'),
+                    product_id: button.getAttribute('product_id'),
+                    cartItemsCount: parsedItems ? parsedItems.length : 0,
+                    cartItems: parsedItems
                 });
             });
         });

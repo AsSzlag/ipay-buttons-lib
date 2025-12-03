@@ -2,7 +2,7 @@ import { BaseIpayButton } from '../shared/base-button.js';
 import { buttonBaseStyles, variantStyles } from '../shared/styles.js';
 import { ipayLogo } from '../shared/logo.js';
 
-const BASE_URL = 'https://app.ipay-dev.host06.300devs.com';
+const BASE_URL = 'http://185.25.151.171:8411';
 const TARGET_URL = `${BASE_URL}/new-individual-application`;
 
 class IpayButtonDouble extends HTMLElement {

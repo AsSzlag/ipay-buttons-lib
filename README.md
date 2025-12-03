@@ -1,6 +1,6 @@
 # ipay-buttons
 
-Beautiful, framework-agnostic Web Components library for launching iPay flows from any site or app. Features 15 different button variants with consistent styling and hover effects, including an interactive calculator component.
+Beautiful, framework-agnostic Web Components library for launching iPay flows from any site or app. Features 16 different button variants with consistent styling and hover effects, including an interactive calculator component and a cart checkout component.
 
 ## Installation
 
@@ -12,7 +12,8 @@ yarn add ipay-buttons
 
 ## Features
 
-- **15 Button Variants**: Multiple button designs for different use cases
+- **16 Button Variants**: Multiple button designs for different use cases
+- **Cart Checkout Component**: Handles multiple cart items (1-100) with customer info and delivery details
 - **Interactive Calculator**: Full-featured calculator with client type selection, monthly rate slider, and dynamic calculations
 - **Web Components**: Works in React, Vue, Angular, Svelte, and vanilla JS
 - **Zero dependencies** and lightweight
@@ -83,6 +84,18 @@ Side modal button variant.
 #### `ipay-modal-side-dark`
 Dark themed side modal button.
 
+### Cart Components
+
+#### `ipay-button-cart`
+Cart checkout button that handles multiple items (1-100) with customer information and delivery details. Each cart item requires `url`, `price`, and `count`. Supports optional `product_id` per item.
+
+**Features:**
+- Handles 1-100 cart items via JSON attribute
+- Sends standard customer info (id, name, email, phone, delivery_price, product_id)
+- Each cart item includes: `url`, `price`, `count` (and optional `product_id` per item)
+- Error handling for invalid JSON
+- Consistent styling with other iPay buttons
+
 ## Quick Start (Vanilla HTML/JS)
 
 **Important:** You must provide `id` (partner ID), `price`, `count`, and `product_id` attributes for the buttons to work correctly.
@@ -149,6 +162,20 @@ Dark themed side modal button.
     id="order-126"
     price="149.99">
   </ipay-bubble>
+
+  <!-- Cart button with multiple items -->
+  <ipay-button-cart 
+    id="PARTNER-12345"
+    name="John Doe"
+    email="john@example.com"
+    phone="+48123456789"
+    delivery_price="15.99"
+    product_id="MAIN-PRODUCT-001"
+    cart-items='[
+      {"url": "https://example.com/product/1", "price": "299.99", "count": "2", "product_id": "PROD-001"},
+      {"url": "https://example.com/product/2", "price": "149.99", "count": "1", "product_id": "PROD-002"}
+    ]'>
+  </ipay-button-cart>
 </body>
 </html>
 ```
@@ -157,7 +184,7 @@ When clicked, any button will navigate to iPay website with the provided attribu
 
 Example navigation:
 ```
-https://app.ipay-dev.host06.300devs.com/?id=order-123&price=299.99&name=John%20Doe&email=john%40example.com
+http://185.25.151.171:8411/new-individual-application?id=order-123&price=299.99&name=John%20Doe&email=john%40example.com
 ```
 
 ## React Usage
@@ -213,6 +240,19 @@ export default function App() {
       <ipay-button-double 
         id="order-125"
         price="999.99"
+      />
+
+      {/* Cart button with multiple items */}
+      <ipay-button-cart 
+        id="PARTNER-12345"
+        name="John Doe"
+        email="john@example.com"
+        phone="+48123456789"
+        delivery_price="15.99"
+        cart-items={JSON.stringify([
+          { url: 'https://example.com/product/1', price: '299.99', count: '2' },
+          { url: 'https://example.com/product/2', price: '149.99', count: '1' }
+        ])}
       />
     </div>
   );
@@ -338,6 +378,7 @@ import 'ipay-buttons';
 | `tax`    | string/number   | 0                                                  | Tax/interest rate percentage (e.g., "2" for 2%). Only used by `ipay-calculator` |
 | `delivery_price` | string/number | undefined | Delivery/shipping price |
 | `product_id` | string | undefined | Product identifier (required) |
+| `cart-items` | string (JSON) | undefined | JSON string with array of cart items - only for `ipay-button-cart`. Each item must have: `url`, `price`, `count` (optional: `product_id`) |
 
 ### Required Attributes:
 - **`id`**: Partner ID number (obtained from partner panel or through iPay) - **Required**
@@ -372,6 +413,14 @@ import 'ipay-buttons';
 - Automatically calculates rate as `price / 10`
 - Displays "Rata od X zł" where X is the calculated rate
 - Falls back to "Rata od 12,00 zł" if no price is provided
+
+#### Cart Checkout (`ipay-button-cart`)
+- Accepts multiple cart items (1-100) via JSON attribute
+- Each cart item requires: `url`, `price`, `count`
+- Optional `product_id` per item
+- Sends data as: `items[0][url]`, `items[0][price]`, `items[0][count]`, etc.
+- Includes `items_count` parameter with total number of items
+- Validates JSON and logs warnings/errors if invalid
 
 #### Hover Effects
 - All buttons have consistent hover effects with dark blue background (`#003574`)

@@ -222,7 +222,7 @@ export class AppModule {}</code></pre>
 
     <h2>2. Dostępne Komponenty</h2>
     
-    <p>Biblioteka zawiera <strong>15 różnych wariantów przycisków</strong> plus interaktywny kalkulator:</p>
+    <p>Biblioteka zawiera <strong>16 różnych wariantów przycisków</strong> plus interaktywny kalkulator:</p>
     
     <h3>2.1 Standardowe Przyciski</h3>
     <table>
@@ -318,6 +318,20 @@ export class AppModule {}</code></pre>
             <td><code>&lt;ipay-modal-side-dark&gt;</code></td>
             <td>Ciemny tematyczny przycisk modalny boczny</td>
             <td>Kompatybilność z ciemnym motywem</td>
+        </tr>
+    </table>
+
+    <h3>2.4 Komponent Koszyka</h3>
+    <table>
+        <tr>
+            <th>Komponent</th>
+            <th>Opis</th>
+            <th>Zastosowanie</th>
+        </tr>
+        <tr>
+            <td><code>&lt;ipay-button-cart&gt;</code></td>
+            <td>Przycisk checkout koszyka obsługujący wiele produktów (1-100) z informacjami o kliencie i dostawie</td>
+            <td>Finalizacja zakupu z wieloma produktami w koszyku</td>
         </tr>
     </table>
 
@@ -454,6 +468,12 @@ export class AppModule {}</code></pre>
             <td>undefined</td>
             <td><strong>WYMAGANE:</strong> Identyfikator produktu</td>
         </tr>
+        <tr>
+            <td><code>cart-items</code></td>
+            <td>string (JSON)</td>
+            <td>undefined</td>
+            <td><strong>Tylko dla ipay-button-cart:</strong> JSON string z tablicą produktów koszyka. Każdy produkt musi mieć: <code>url</code>, <code>price</code>, <code>count</code> (opcjonalnie: <code>product_id</code>)</td>
+        </tr>
     </table>
 
     <div class="page-break"></div>
@@ -508,6 +528,32 @@ export class AppModule {}</code></pre>
   email="info@firma.com"&gt;
 &lt;/ipay-button-leasing-rates&gt;</code></pre>
 
+    <h3>5.5 Przycisk Koszyka z Wieloma Produktami</h3>
+    <pre><code>&lt;ipay-button-cart 
+  id="PARTNER-12345"
+  name="Jan Kowalski"
+  email="jan@example.com"
+  phone="+48123456789"
+  delivery_price="15.99"
+  product_id="MAIN-PRODUCT-001"
+  cart-items='[
+    {"url": "https://example.com/product/1", "price": "299.99", "count": "2", "product_id": "PROD-001"},
+    {"url": "https://example.com/product/2", "price": "149.99", "count": "1", "product_id": "PROD-002"},
+    {"url": "https://example.com/product/3", "price": "89.99", "count": "3"}
+  ]'&gt;
+&lt;/ipay-button-cart&gt;</code></pre>
+
+    <div class="info-box">
+        <strong>📋 Format cart-items:</strong><br>
+        Atrybut <code>cart-items</code> musi być prawidłowym JSON stringiem zawierającym tablicę obiektów. Każdy obiekt reprezentuje jeden produkt w koszyku i musi zawierać:
+        <ul style="margin-top: 10px; margin-bottom: 0;">
+            <li><code>url</code> - URL produktu (wymagane)</li>
+            <li><code>price</code> - Cena produktu (wymagane)</li>
+            <li><code>count</code> - Ilość produktu (wymagane)</li>
+            <li><code>product_id</code> - Identyfikator produktu (opcjonalne, może być podane dla każdego produktu osobno)</li>
+        </ul>
+    </div>
+
     <div class="page-break"></div>
 
     <h2>6. Zachowanie i Parametry Zapytania</h2>
@@ -517,7 +563,7 @@ export class AppModule {}</code></pre>
     
     <div class="info-box">
         <strong>Przykładowy URL:</strong><br>
-        <code>https://app.ipay-dev.host06.300devs.com/new-individual-application?id=PARTNER-12345&price=299.99&count=1&product_id=PROD-67890&name=Jan%20Kowalski&email=jan%40example.com&months=10&client_type=individual</code>
+        <code>http://185.25.151.171:8411/new-individual-application?id=PARTNER-12345&price=299.99&count=1&product_id=PROD-67890&name=Jan%20Kowalski&email=jan%40example.com&months=10&client_type=individual</code>
     </div>
 
     <h3>6.2 Parametry Specyficzne dla Kalkulatora</h3>
@@ -531,6 +577,20 @@ export class AppModule {}</code></pre>
     <ul>
         <li><strong>Klient Indywidualny:</strong> <code>/new-individual-application</code></li>
         <li><strong>Klient Firmowy:</strong> <code>/new-company-application</code></li>
+    </ul>
+
+    <h3>6.4 Format Parametrów Koszyka (ipay-button-cart)</h3>
+    <p>Komponent <code>ipay-button-cart</code> wysyła produkty w następującym formacie:</p>
+    <div class="info-box">
+        <strong>Przykładowy URL z koszykiem:</strong><br>
+        <code>http://185.25.151.171:8411/new-individual-application?id=PARTNER-12345&name=Jan+Kowalski&email=jan%40example.com&phone=%2B48123456789&delivery_price=15.99&product_id=MAIN-PRODUCT-001&items[0][url]=https%3A%2F%2Fexample.com%2Fproduct%2F1&items[0][price]=299.99&items[0][count]=2&items[0][product_id]=PROD-001&items[1][url]=https%3A%2F%2Fexample.com%2Fproduct%2F2&items[1][price]=149.99&items[1][count]=1&items[1][product_id]=PROD-002&items_count=2</code>
+    </div>
+    <p>Parametry koszyka:</p>
+    <ul>
+        <li><code>items[0][url]</code>, <code>items[0][price]</code>, <code>items[0][count]</code> - pierwszy produkt</li>
+        <li><code>items[1][url]</code>, <code>items[1][price]</code>, <code>items[1][count]</code> - drugi produkt</li>
+        <li>... i tak dalej dla każdego produktu</li>
+        <li><code>items_count</code> - całkowita liczba produktów w koszyku</li>
     </ul>
 
     <h2>7. Stylizacja i Dostosowywanie</h2>
@@ -628,6 +688,15 @@ Odznaka: Ukryta</code></pre>
         <li>Używaj atrybutów komponentu do kontroli zachowania, nie CSS</li>
     </ul>
 
+    <h3>10.4 Problemy z Komponentem Koszyka</h3>
+    <ul>
+        <li>Upewnij się, że atrybut <code>cart-items</code> jest prawidłowym JSON stringiem</li>
+        <li>Sprawdź konsolę przeglądarki - komponent loguje ostrzeżenia przy nieprawidłowym formacie JSON</li>
+        <li>Każdy produkt w koszyku musi mieć: <code>url</code>, <code>price</code>, <code>count</code></li>
+        <li>Maksymalna liczba produktów: 100</li>
+        <li>Minimalna liczba produktów: 1 (komponent nie nawiguje, jeśli koszyk jest pusty)</li>
+    </ul>
+
     <div class="page-break"></div>
 
     <h2>11. Najlepsze Praktyki</h2>
@@ -639,6 +708,7 @@ Odznaka: Ukryta</code></pre>
         <li><strong>ipay-button-leasing:</strong> Gdy kierujesz się do klientów biznesowych z opcjami leasingu</li>
         <li><strong>ipay-calculator:</strong> Gdy chcesz interaktywnego obliczania rat i wyboru typu klienta</li>
         <li><strong>ipay-button-leasing-rates:</strong> Gdy chcesz wyraźnie pokazać obliczone raty</li>
+        <li><strong>ipay-button-cart:</strong> Gdy finalizujesz zakup z wieloma produktami w koszyku (1-100 produktów)</li>
     </ul>
 
     <h3>11.2 Wydajność</h3>
