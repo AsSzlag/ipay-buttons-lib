@@ -133,6 +133,7 @@ class IpayBubble extends HTMLElement {
             align-items: center;
             justify-content: center;
             box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+            position: relative;
           }
 
           .green-logo svg {
@@ -140,18 +141,38 @@ class IpayBubble extends HTMLElement {
             height: 32px;
           }
 
+          .chevron-right {
+            position: absolute;
+            right: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .chevron-right svg {
+            width: 100%;
+            height: 100%;
+          }
+
           .main-text {
-            font-size: 14px;
-            font-weight: 700;
-            color: #003574;
+            font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 100%; /* 12px */
+            letter-spacing: 0.15px;
+            color: var(--Colorblack, #111);
             text-align: center;
             margin: 0;
-            line-height: 1.2;
           }
         </style>
         <div class="popup">
           <button class="close-button" type="button">×</button>
-          <div class="logo">
+          <div class="logo green-logo">
             ${bubbleLogo}
           </div>
           <h2 class="main-text">Kup na raty</h2>

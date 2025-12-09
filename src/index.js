@@ -15,6 +15,8 @@ import './components/ipay-modal-side.js'
 import './components/ipay-modal-side-dark.js'
 import './components/ipay-calculator.js'
 import './components/ipay-button-cart.js'
+import './components/ipay-modal-info.js'
+import './components/ipay-modal-info-leasing.js'
 
 // Re-export for direct imports (optional)
 export { IpayButton } from './components/ipay-button.js';
@@ -33,3 +35,5 @@ export { IpayModalSide } from './components/ipay-modal-side.js';
 export { IpayModalSideDark } from './components/ipay-modal-side-dark.js';
 export { IpayCalculator } from './components/ipay-calculator.js';
 export { IpayButtonCart } from './components/ipay-button-cart.js';
+export { IpayModalInfo } from './components/ipay-modal-info.js';
+export { IpayModalInfoLeasing } from './components/ipay-modal-info-leasing.js';

@@ -151,7 +151,7 @@
 </head>
 <body>
     <h1>iPay Buttons Library - Instrukcja Użytkowania</h1>
-    <p><strong>Wersja:</strong> 1.10.0</p>
+    <p><strong>Wersja:</strong> 1.13.0</p>
     <p><strong>Ostatnia aktualizacja:</strong> 2025</p>
     
     <div class="info-box">
@@ -222,7 +222,7 @@ export class AppModule {}</code></pre>
 
     <h2>2. Dostępne Komponenty</h2>
     
-    <p>Biblioteka zawiera <strong>16 różnych wariantów przycisków</strong> plus interaktywny kalkulator:</p>
+    <p>Biblioteka zawiera <strong>18 różnych wariantów przycisków</strong> plus interaktywny kalkulator:</p>
     
     <h3>2.1 Standardowe Przyciski</h3>
     <table>
@@ -332,6 +332,25 @@ export class AppModule {}</code></pre>
             <td><code>&lt;ipay-button-cart&gt;</code></td>
             <td>Przycisk checkout koszyka obsługujący wiele produktów (1-100) z informacjami o kliencie i dostawie</td>
             <td>Finalizacja zakupu z wieloma produktami w koszyku</td>
+        </tr>
+    </table>
+
+    <h3>2.5 Komponenty Panelu Informacyjnego</h3>
+    <table>
+        <tr>
+            <th>Komponent</th>
+            <th>Opis</th>
+            <th>Zastosowanie</th>
+        </tr>
+        <tr>
+            <td><code>&lt;ipay-modal-info&gt;</code></td>
+            <td>Panel informacyjny z nagłówkiem, głównym przyciskiem CTA, wskaźnikami kroków i stopką. Idealny do wyświetlania informacji o finansowaniu i procesie.</td>
+            <td>Wyświetlanie informacji o finansowaniu dla klientów indywidualnych</td>
+        </tr>
+        <tr>
+            <td><code>&lt;ipay-modal-info-leasing&gt;</code></td>
+            <td>Wariant panelu informacyjnego dla leasingu z innym tekstem podtytułu i układem stopki. Przekierowuje do aplikacji firmowej.</td>
+            <td>Wyświetlanie informacji o finansowaniu dla klientów firmowych i leasingu</td>
         </tr>
     </table>
 
@@ -554,6 +573,35 @@ export class AppModule {}</code></pre>
         </ul>
     </div>
 
+    <h3>5.6 Panel Informacyjny dla Klientów Indywidualnych</h3>
+    <pre><code>&lt;ipay-modal-info 
+  id="PARTNER-12345"
+  price="5000.00"
+  name="Jan Kowalski"
+  email="jan@example.com"
+  url="https://example.com/product"&gt;
+&lt;/ipay-modal-info&gt;</code></pre>
+
+    <h3>5.7 Panel Informacyjny dla Leasingu/Firm</h3>
+    <pre><code>&lt;ipay-modal-info-leasing 
+  id="PARTNER-12345"
+  price="5000.00"
+  name="Firma Sp. z o.o."
+  email="info@firma.com"
+  url="https://example.com/product"&gt;
+&lt;/ipay-modal-info-leasing&gt;</code></pre>
+
+    <div class="info-box">
+        <strong>ℹ️ Informacje o Panelach Informacyjnych:</strong><br>
+        <ul style="margin-top: 10px; margin-bottom: 0;">
+            <li>Komponenty wyświetlają informacje o procesie finansowania w trzech krokach</li>
+            <li>Główny przycisk CTA zawiera zieloną kropkę z ikoną chevron</li>
+            <li><code>ipay-modal-info</code> przekierowuje do aplikacji indywidualnej</li>
+            <li><code>ipay-modal-info-leasing</code> przekierowuje do aplikacji firmowej</li>
+            <li>Używają ikon zaprojektowanych w Figma dla profesjonalnego wyglądu</li>
+        </ul>
+    </div>
+
     <div class="page-break"></div>
 
     <h2>6. Zachowanie i Parametry Zapytania</h2>
@@ -709,6 +757,8 @@ Odznaka: Ukryta</code></pre>
         <li><strong>ipay-calculator:</strong> Gdy chcesz interaktywnego obliczania rat i wyboru typu klienta</li>
         <li><strong>ipay-button-leasing-rates:</strong> Gdy chcesz wyraźnie pokazać obliczone raty</li>
         <li><strong>ipay-button-cart:</strong> Gdy finalizujesz zakup z wieloma produktami w koszyku (1-100 produktów)</li>
+        <li><strong>ipay-modal-info:</strong> Gdy chcesz wyświetlić informacje o finansowaniu dla klientów indywidualnych z wizualizacją procesu</li>
+        <li><strong>ipay-modal-info-leasing:</strong> Gdy chcesz wyświetlić informacje o finansowaniu dla klientów firmowych i leasingu</li>
     </ul>
 
     <h3>11.2 Wydajność</h3>
@@ -726,7 +776,7 @@ Odznaka: Ukryta</code></pre>
     </ul>
 
     <div class="footer">
-        <p><strong>iPay Buttons Library v1.10.0</strong></p>
+        <p><strong>iPay Buttons Library v1.13.0</strong></p>
         <p>Więcej informacji: <a href="https://github.com/asszlag/ipay-buttons-lib">Repozytorium GitHub</a></p>
         <p>© 2025 a.s.szlag@gmail.com | Licencja MIT</p>
     </div>

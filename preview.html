@@ -192,6 +192,22 @@
                     {"url": "https://example.com/product/3", "price": "89.99", "count": "3"}
                 ]'>
             </ipay-button-cart>
+
+            <ipay-modal-info 
+                id="test-modal-info-1"
+                price="5000.00"
+                name="John Doe"
+                email="john@example.com"
+                url="https://example.com/product">
+            </ipay-modal-info>
+
+            <ipay-modal-info-leasing 
+                id="test-modal-info-leasing-1"
+                price="5000.00"
+                name="John Doe"
+                email="john@example.com"
+                url="https://example.com/product">
+            </ipay-modal-info-leasing>
         </div>
         
         <div class="test-info">
@@ -221,6 +237,8 @@
                 <li><strong>ipay-modal-side:</strong> Side modal button variant</li>
                 <li><strong>ipay-modal-side-dark:</strong> Dark themed side modal button</li>
                 <li><strong>ipay-button-cart:</strong> Cart checkout button that handles multiple items (1-100) with customer info and delivery details</li>
+                <li><strong>ipay-modal-info:</strong> Informational panel with header, CTA button, step indicators, and footer with logo</li>
+                <li><strong>ipay-modal-info-leasing:</strong> Informational panel variant for leasing with different subheader text and footer layout</li>
             </ul>
             
             <h3>📝 Usage Examples:</h3>
@@ -300,7 +318,25 @@
     {"url": "https://example.com/product/1", "price": "299.99", "count": "2"},
     {"url": "https://example.com/product/2", "price": "149.99", "count": "1"}
   ]'&gt;
-&lt;/ipay-button-cart&gt;</pre>
+&lt;/ipay-button-cart&gt;
+
+&lt;!-- Modal Info Panel --&gt;
+&lt;ipay-modal-info 
+  id="modal-info-1"
+  price="5000.00"
+  name="John Doe"
+  email="john@example.com"
+  url="https://example.com/product"&gt;
+&lt;/ipay-modal-info&gt;
+
+&lt;!-- Modal Info Leasing Panel --&gt;
+&lt;ipay-modal-info-leasing 
+  id="modal-info-leasing-1"
+  price="5000.00"
+  name="John Doe"
+  email="john@example.com"
+  url="https://example.com/product"&gt;
+&lt;/ipay-modal-info-leasing&gt;</pre>
             
             <h3>🎨 Styling Features:</h3>
             <ul>
@@ -362,6 +398,8 @@
             const modalSideDarkButtons = document.querySelectorAll('ipay-modal-side-dark');
             const cartButtons = document.querySelectorAll('ipay-button-cart');
             const calculatorButtons = document.querySelectorAll('ipay-calculator');
+            const modalInfoButtons = document.querySelectorAll('ipay-modal-info');
+            const modalInfoLeasingButtons = document.querySelectorAll('ipay-modal-info-leasing');
             
             // Log calculator buttons
             calculatorButtons.forEach((calc, index) => {
@@ -389,7 +427,9 @@
                 modalSideShort: modalSideShortButtons.length,
                 modalSide: modalSideButtons.length,
                 modalSideDark: modalSideDarkButtons.length,
-                cart: cartButtons.length
+                cart: cartButtons.length,
+                modalInfo: modalInfoButtons.length,
+                modalInfoLeasing: modalInfoLeasingButtons.length
             });
             
             // Log main buttons

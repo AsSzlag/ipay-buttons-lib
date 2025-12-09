@@ -1,6 +1,6 @@
 # ipay-buttons
 
-Beautiful, framework-agnostic Web Components library for launching iPay flows from any site or app. Features 16 different button variants with consistent styling and hover effects, including an interactive calculator component and a cart checkout component.
+Beautiful, framework-agnostic Web Components library for launching iPay flows from any site or app. Features 18 different button variants with consistent styling and hover effects, including an interactive calculator component, cart checkout component, and informational panel components.
 
 ## Installation
 
@@ -12,7 +12,7 @@ yarn add ipay-buttons
 
 ## Features
 
-- **16 Button Variants**: Multiple button designs for different use cases
+- **18 Button Variants**: Multiple button designs for different use cases
 - **Cart Checkout Component**: Handles multiple cart items (1-100) with customer info and delivery details
 - **Interactive Calculator**: Full-featured calculator with client type selection, monthly rate slider, and dynamic calculations
 - **Web Components**: Works in React, Vue, Angular, Svelte, and vanilla JS
@@ -96,6 +96,29 @@ Cart checkout button that handles multiple items (1-100) with customer informati
 - Error handling for invalid JSON
 - Consistent styling with other iPay buttons
 
+### Informational Panel Components
+
+#### `ipay-modal-info`
+Informational panel component with header, main CTA button, step indicators, and footer. Perfect for displaying financing information and process steps.
+
+**Features:**
+- Header section with main title and subheader
+- Main CTA button with green dot and chevron icon
+- Three-step process indicators (Wniosek online, Zatwierdź umowę, Odbierz usługę lub towar)
+- Footer with "Dowiedz się więcej" link and iPay logo
+- Routes to individual application URL
+- Uses Figma-designed icons for step indicators
+
+#### `ipay-modal-info-leasing`
+Leasing variant of the informational panel with different subheader text and footer layout.
+
+**Features:**
+- Same structure as `ipay-modal-info` but optimized for leasing
+- Subheader: "Dostępne raty dla osób oraz raty i leasing dla firm"
+- Footer layout with vertically stacked CTA and logo
+- Routes to company application URL
+- Uses same Figma-designed icons
+
 ## Quick Start (Vanilla HTML/JS)
 
 **Important:** You must provide `id` (partner ID), `price`, `count`, and `product_id` attributes for the buttons to work correctly.
@@ -176,6 +199,24 @@ Cart checkout button that handles multiple items (1-100) with customer informati
       {"url": "https://example.com/product/2", "price": "149.99", "count": "1", "product_id": "PROD-002"}
     ]'>
   </ipay-button-cart>
+
+  <!-- Informational panel for individuals -->
+  <ipay-modal-info 
+    id="PARTNER-12345"
+    price="5000.00"
+    name="John Doe"
+    email="john@example.com"
+    url="https://example.com/product">
+  </ipay-modal-info>
+
+  <!-- Informational panel for leasing/companies -->
+  <ipay-modal-info-leasing 
+    id="PARTNER-12345"
+    price="5000.00"
+    name="John Doe"
+    email="john@example.com"
+    url="https://example.com/product">
+  </ipay-modal-info-leasing>
 </body>
 </html>
 ```
@@ -253,6 +294,24 @@ export default function App() {
           { url: 'https://example.com/product/1', price: '299.99', count: '2' },
           { url: 'https://example.com/product/2', price: '149.99', count: '1' }
         ])}
+      />
+
+      {/* Informational panel for individuals */}
+      <ipay-modal-info 
+        id="PARTNER-12345"
+        price="5000.00"
+        name="John Doe"
+        email="john@example.com"
+        url="https://example.com/product"
+      />
+
+      {/* Informational panel for leasing/companies */}
+      <ipay-modal-info-leasing 
+        id="PARTNER-12345"
+        price="5000.00"
+        name="John Doe"
+        email="john@example.com"
+        url="https://example.com/product"
       />
     </div>
   );
@@ -421,6 +480,15 @@ import 'ipay-buttons';
 - Sends data as: `items[0][url]`, `items[0][price]`, `items[0][count]`, etc.
 - Includes `items_count` parameter with total number of items
 - Validates JSON and logs warnings/errors if invalid
+
+#### Informational Panels (`ipay-modal-info`, `ipay-modal-info-leasing`)
+- Display financing information with step-by-step process indicators
+- Main CTA button with green dot and chevron icon
+- Three-step process visualization (Wniosek online, Zatwierdź umowę, Odbierz usługę lub towar)
+- Footer with "Dowiedz się więcej" link and iPay logo
+- `ipay-modal-info` routes to individual application URL
+- `ipay-modal-info-leasing` routes to company application URL
+- Uses Figma-designed icons for professional appearance
 
 #### Hover Effects
 - All buttons have consistent hover effects with dark blue background (`#003574`)

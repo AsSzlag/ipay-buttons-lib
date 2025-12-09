@@ -109,9 +109,13 @@ class IpayButtonLeasingWrapped extends HTMLElement {
           }
 
           .subtitle {
+            color: var(--Colorblack, #111);
+            font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             font-size: 12px;
-            color: #6B7280;
-            font-weight: 400;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 100%; /* 12px */
+            letter-spacing: 0.15px;
             margin: 0;
             transition: color 0.2s ease;
           }
@@ -120,9 +124,13 @@ class IpayButtonLeasingWrapped extends HTMLElement {
             display: flex;
             align-items: center;
             gap: 8px;
-            color: #6B7280;
-            font-size: 14px;
-            font-weight: 600;
+            color: var(--Colorblack, #111);
+            font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 100%; /* 12px */
+            letter-spacing: 0.15px;
             transition: color 0.2s ease;
           }
 
@@ -140,11 +148,29 @@ class IpayButtonLeasingWrapped extends HTMLElement {
           }
   
           .green-dot {
-            width: 8px;
-            height: 8px;
+            width: 12px;
+            height: 12px;
             background: #10B981;
             border-radius: 50%;
             flex-shrink: 0;
+            position: relative;
+          }
+
+          .chevron-right {
+            position: absolute;
+            right: 2px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .chevron-right svg {
+            width: 100%;
+            height: 100%;
           }
         </style>
         <button>
@@ -156,7 +182,13 @@ class IpayButtonLeasingWrapped extends HTMLElement {
           </div>
           <div class="action">
             <span >Oblicz</span>
-            <div class="green-dot"></div>
+            <div class="green-dot">
+              <div class="chevron-right">
+                <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 6L5 4L3 2" stroke="#FFFFFF" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
           </div>
         </button>
       `;
